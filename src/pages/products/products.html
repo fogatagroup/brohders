@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Productos</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <div *ngIf="loading" style="text-align:center" class="center">
+    <ion-spinner name="bubbles"></ion-spinner>
+  </div>
+  <div *ngIf="!loading">
+    <ion-list>
+        <ion-item *ngFor="let product of productsList; let i=index">
+          {{i+1}}.&nbsp;{{product.name}}
+          <diV style="float:right">
+            <button  ion-button icon-end color="secondary" round>Editar</button>
+            <button  ion-button icon-end color="danger" round>Eliminar</button>    
+          </diV>
+        </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

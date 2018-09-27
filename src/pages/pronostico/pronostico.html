@@ -1,0 +1,37 @@
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Degustaciones</ion-title>
+    </ion-navbar>
+  </ion-header>
+  <ion-content padding>
+    <div *ngIf="loading" style="text-align:center" class="center">
+      <ion-spinner name="bubbles"></ion-spinner>
+    </div>
+    <div *ngIf="!loading">
+        <ion-list>
+          PSMT Fraijanes
+          <ion-item>
+              <ion-label>Fecha:</ion-label>
+              <ion-datetime #date ></ion-datetime>
+          </ion-item>
+          <ion-item>
+            <ion-label>Producto para:</ion-label>
+            <ion-select #weekday multiple='true'>
+                <ion-option *ngFor="let day of weekdays" [value]="day.value">{{day.day}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <button ion-button type='button' (click)="calculate(date.value,weekday.value)">Calcular</button>
+        <hr>
+        <ion-list *ngFor="let item of pronostico"> 
+            
+            <ion-item>
+              <ion-label>{{convertIdToName(item.productid)}}: {{item.value}}</ion-label>
+            </ion-item>
+          </ion-list>
+    </div>
+
+  </ion-content>

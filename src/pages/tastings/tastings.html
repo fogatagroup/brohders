@@ -1,0 +1,99 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Configuración</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <div *ngIf="loading" style="text-align:center" class="center">
+    <ion-spinner name="bubbles"></ion-spinner>
+  </div>
+  <div *ngIf="!loading">
+      <div padding>
+        <ion-segment [(ngModel)]="shop">
+          <ion-segment-button value="tastings">
+            Degustaciones
+          </ion-segment-button>
+          <ion-segment-button value="aumento">
+            Aumento por Degustaciones
+          </ion-segment-button>
+          <ion-segment-button value="shelves">
+            Estanterias
+          </ion-segment-button>
+          <ion-segment-button value="stock">
+              Existencias
+          </ion-segment-button>
+        </ion-segment>
+      </div>
+      
+      <div [ngSwitch]="shop">
+        <div *ngSwitchCase="'tastings'">
+          <ion-list>
+            <ion-item>
+              <ion-label>Dia de la Semana:</ion-label>
+              <ion-select #weekday (ionChange)="onChangeDay(weekday.value)">
+                  <ion-option *ngFor="let day of weekdays" [value]="day.value">{{day.day}}</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          <ng-container *ngIf="isValue">
+            <form [formGroup]="tastingsForm" (ngSubmit)="onForm(tastingsForm.value)">
+              <ion-list > 
+                <ion-item *ngFor="let item of selectedTastings">
+                  <ion-label>{{convertIdToName(item.productid)}}</ion-label>
+                  <ion-toggle [formControlName]="item.tastingid"></ion-toggle>
+                </ion-item>
+              </ion-list>
+              <button ion-button full type="submit">Guardar</button>
+            </form>
+          </ng-container>
+        </div>
+      
+        <div *ngSwitchCase="'shelves'">
+            <form [formGroup]="shelvesForm" (ngSubmit)="onFormSubmit(shelvesForm.value)">
+                <ion-list *ngFor="let item of shelveList"> 
+                  {{convertIdToName(item.productid)}}
+                  <ion-item>
+                    <ion-label>Tamaño</ion-label>
+                    <ion-input [formControlName]="item.shelveid+'size'" type="number"></ion-input>
+                  </ion-item>
+                
+                  <ion-item>
+                    <ion-label>Porcentaje</ion-label>
+                    <ion-input [formControlName]="item.shelveid+'porcentage'" type="number"></ion-input>
+                  </ion-item>
+                </ion-list>
+                <button ion-button full type="submit">Guardar</button>
+            </form>
+        </div>
+
+        <div *ngSwitchCase="'aumento'">
+            <form [formGroup]="increaseForm" (ngSubmit)="onFormIncrease(increaseForm.value)">
+                <ion-list *ngFor="let item of aumentoList"> 
+                  {{convertIdToName(item.productid)}}
+                  <ion-item>
+                    <ion-label>Incremento</ion-label>
+                    <ion-input [formControlName]="item.tastingincreaseid" type="number"></ion-input>
+                  </ion-item>
+                </ion-list>
+                <button ion-button full type="submit">Guardar</button>
+            </form>
+        </div>
+
+        <div *ngSwitchCase="'stock'">
+            <form [formGroup]="stockForm" (ngSubmit)="onFormStock(stockForm.value)">
+                <ion-list *ngFor="let item of stockList"> 
+                  {{convertIdToName(item.productid)}}
+                  <ion-item>
+                    <ion-label>Cantidad</ion-label>
+                    <ion-input [formControlName]="item.stockid" type="number"></ion-input>
+                  </ion-item>
+                </ion-list>
+                <button ion-button full type="submit">Guardar</button>
+            </form>
+        </div>
+      </div>
+  </div>
+</ion-content>

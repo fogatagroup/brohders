@@ -1,0 +1,80 @@
+export var products=[
+    {
+        "productid": 1,
+        "name": "BL",
+        "description": "Blanco",
+        "createdon": "2018-09-15T06:00:00.000Z",
+        "createdby": 0,
+        "modifiedon": null,
+        "modifiedby": null,
+        "deletedon": null,
+        "deletedby": null,
+        "isdeleted": false,
+        "isactive": true
+    },
+    {
+        "productid": 2,
+        "name": "C/S",
+        "description": "Con Semillas",
+        "createdon": "2018-09-15T06:00:00.000Z",
+        "createdby": 0,
+        "modifiedon": null,
+        "modifiedby": null,
+        "deletedon": null,
+        "deletedby": null,
+        "isdeleted": false,
+        "isactive": true
+    },
+    {
+        "productid": 3,
+        "name": "AV",
+        "description": "Avena",
+        "createdon": "2018-09-15T06:00:00.000Z",
+        "createdby": 0,
+        "modifiedon": null,
+        "modifiedby": null,
+        "deletedon": null,
+        "deletedby": null,
+        "isdeleted": false,
+        "isactive": true
+    },
+    {
+        "productid": 4,
+        "name": "H85",
+        "description": "Hamburguesa",
+        "createdon": "2018-09-15T06:00:00.000Z",
+        "createdby": 0,
+        "modifiedon": null,
+        "modifiedby": null,
+        "deletedon": null,
+        "deletedby": null,
+        "isdeleted": false,
+        "isactive": true
+    },
+    {
+        "productid": 5,
+        "name": "HD",
+        "description": "Hot Dog",
+        "createdon": "2018-09-15T06:00:00.000Z",
+        "createdby": 0,
+        "modifiedon": null,
+        "modifiedby": null,
+        "deletedon": null,
+        "deletedby": null,
+        "isdeleted": false,
+        "isactive": true
+    },
+    {
+        "productid": 6,
+        "name": "DR",
+        "description": "Dinner Rolls",
+        "createdon": "2018-09-15T06:00:00.000Z",
+        "createdby": 0,
+        "modifiedon": null,
+        "modifiedby": null,
+        "deletedon": null,
+        "deletedby": null,
+        "isdeleted": false,
+        "isactive": true
+    }
+]

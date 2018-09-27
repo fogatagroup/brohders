@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Tiendas</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <div *ngIf="loading" style="text-align:center" class="center">
+    <ion-spinner name="bubbles"></ion-spinner>
+  </div>
+  <div *ngIf="!loading">
+    <ion-list inset>
+      <button ion-item *ngFor="let item of shopList" [disabled]="item.shopid!=1" (click)="onClickItem($event, item)" >
+        {{ item.name }}
+        <div style="float:right">
+          <ion-icon name="arrow-dropright"></ion-icon>
+        </div>
+      </button> 
+    </ion-list>
+  </div>
+</ion-content>
