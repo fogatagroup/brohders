@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { ErrorHandler, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
@@ -14,6 +14,8 @@ import { TastingsPage } from '../pages/tastings/tastings';
 import { HttpService } from '../providers/http.service';
 import { HttpModule } from '@angular/http';
 import { PronosticoPage } from '../pages/pronostico/pronostico';
+import { LoginFlatPage } from '../pages/login-flat-page/login-flat-page';
+import { AuthService } from '../providers/auth.service';
 
 @NgModule({
   declarations: [
@@ -23,8 +25,8 @@ import { PronosticoPage } from '../pages/pronostico/pronostico';
     ProductsPage,
     ShopsPage,
     TastingsPage,
-    PronosticoPage
-
+    PronosticoPage,
+    LoginFlatPage
   ],
   imports: [
     HttpModule,
@@ -39,13 +41,16 @@ import { PronosticoPage } from '../pages/pronostico/pronostico';
     ProductsPage,
     ShopsPage,
     TastingsPage,
-    PronosticoPage
+    PronosticoPage,
+    LoginFlatPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     HttpService,
+    AuthService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {}

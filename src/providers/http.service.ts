@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/catch';
 import { AlertController } from 'ionic-angular';
+import { serverUrl } from '../config/config';
 
 
 @Injectable()
@@ -15,7 +16,7 @@ export class HttpService {
 
   get(url: string): Observable<any> {
     var headers = new Headers({ 'Content-Type': 'application/json', 'method':'GET'});
-    return this.http.get(url, { headers: headers })
+    return this.http.get(`${serverUrl}/${url}`, { headers: headers })
       .map(response => response)
       .catch(
         error => {
@@ -32,7 +33,7 @@ export class HttpService {
   }
   put(url: string, body: any) {
     var headers = new Headers({ 'Content-Type': 'application/json'});
-    return this.http.put(url, body, { headers: headers })
+    return this.http.put(`${serverUrl}/${url}`, body, { headers: headers })
       .map(response => response)
       .catch(
         error => {
@@ -48,7 +49,7 @@ export class HttpService {
   }
   post(url: string, body: any) {
     var headers = new Headers({ 'Content-Type': 'application/json'});
-    return this.http.post(url, body, { headers: headers })
+    return this.http.post(`${serverUrl}/${url}`, body, { headers: headers })
       .map(response => response)
       .catch(
         error => {
@@ -64,7 +65,7 @@ export class HttpService {
   }
   delete(url: string) {
     var headers = new Headers({ 'Content-Type': 'application/json'});
-    return this.http.delete(url, { headers: headers })
+    return this.http.delete(`${serverUrl}/${url}`, { headers: headers })
       .map(response => response)
       .catch(
         error => {

@@ -11,6 +11,9 @@ import { tastings } from '../data/tastings';
 import { incremento } from '../data/increase';
 import { PronosticoPage } from '../pages/pronostico/pronostico';
 import { stock } from '../data/stock';
+import { LoginFlatPage } from '../pages/login-flat-page/login-flat-page';
+import { AuthService } from '../providers/auth.service';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 
 @Component({
   templateUrl: 'app.html'
@@ -18,11 +21,11 @@ import { stock } from '../data/stock';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any;
 
   pages: Array<{title: string, component: any, icon: string}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private auth: AuthService, private alertCtrl: AlertController) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -41,6 +44,7 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
+      this.rootPage = this.auth.isAuthenticated() ? HomePage : LoginFlatPage;
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       localStorage.setItem("Shelves",JSON.stringify(shelves));
@@ -54,5 +58,26 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+
+  onLogout() {
+    const confirm = this.alertCtrl.create({
+      title: 'Salir',
+      message: '¿Está seguro que desea salir?',
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            this.auth.logout().then(_ => {
+              this.nav.setRoot(LoginFlatPage);
+            })
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 }

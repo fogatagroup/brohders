@@ -1,4 +1,4 @@
-export var serverUrl='http://localhost:3000';
+export var serverUrl='http://localhost:3002';
 
 
 export var weekdays=[
