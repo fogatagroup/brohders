@@ -4,6 +4,11 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Productos</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only color="royal" (click)="add()">
+          <ion-icon name="add-circle"></ion-icon>
+        </button>
+      </ion-buttons>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
@@ -11,14 +16,37 @@
     <ion-spinner name="bubbles"></ion-spinner>
   </div>
   <div *ngIf="!loading">
-    <ion-list>
+    <ion-list *ngIf="!selectedProduct">
         <ion-item *ngFor="let product of productsList; let i=index">
           {{i+1}}.&nbsp;{{product.name}}
           <diV style="float:right">
-            <button  ion-button icon-end color="secondary" round>Editar</button>
-            <button  ion-button icon-end color="danger" round>Eliminar</button>    
+            <button  ion-button icon-end color="secondary" (click)="select(product)" round>Editar</button>
+            <button  ion-button icon-end color="danger" (click)="delete(product.productid)" round>Eliminar</button>    
           </diV>
         </ion-item>
     </ion-list>
+    <form (ngSubmit)="saveForm()" *ngIf="selectedProduct" #productoForm="ngForm">
+        <ion-item-divider color="light" *ngIf="selectedProduct.productid">
+            Editar Producto 
+          </ion-item-divider>
+          <ion-item-divider color="light" *ngIf="!selectedProduct.productid">
+            Crear Producto 
+          </ion-item-divider>
+      <ion-item>
+        <ion-label>Nombre</ion-label>
+        <ion-input type="text" required #name="ngModel" [(ngModel)]="selectedProduct.name" name="name"></ion-input>
+      </ion-item>
+      <div [hidden]="name.valid || name.pristine"
+          class="alert alert-danger">
+          Nombre es requerido
+      </div>
+      <ion-item>
+        <ion-label>Descripción</ion-label>
+        <ion-textarea type="text" #description="ngModel" [(ngModel)]="selectedProduct.description" name="description"></ion-textarea>
+      </ion-item>
+      <button ion-button [disabled]="!productoForm.form.valid" type="submit" block>Guardar</button>
+      <button ion-button color="danger" type="button" (click)="cancelForm()" block>Cancelar</button>
+    </form>
   </div>
+  
 </ion-content>

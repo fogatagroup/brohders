@@ -16,6 +16,10 @@ import { HttpModule } from '@angular/http';
 import { PronosticoPage } from '../pages/pronostico/pronostico';
 import { LoginFlatPage } from '../pages/login-flat-page/login-flat-page';
 import { AuthService } from '../providers/auth.service';
+import { ClientsPage } from '../pages/clients/clients';
+import { ComponentsModule } from '../components/components.module';
+import { PipesModule } from '../pipes/pipes.module';
+import { UsersPage } from '../pages/users/users';
 
 @NgModule({
   declarations: [
@@ -23,14 +27,18 @@ import { AuthService } from '../providers/auth.service';
     HomePage,
     ListPage,
     ProductsPage,
+    ClientsPage,
     ShopsPage,
     TastingsPage,
     PronosticoPage,
-    LoginFlatPage
+    LoginFlatPage,
+    UsersPage
   ],
   imports: [
     HttpModule,
     BrowserModule,
+    ComponentsModule,
+    PipesModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
@@ -42,7 +50,9 @@ import { AuthService } from '../providers/auth.service';
     ShopsPage,
     TastingsPage,
     PronosticoPage,
-    LoginFlatPage
+    ClientsPage,
+    LoginFlatPage,
+    UsersPage
   ],
   providers: [
     StatusBar,

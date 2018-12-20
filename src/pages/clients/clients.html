@@ -1,0 +1,56 @@
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Clientes</ion-title>
+      <ion-buttons end>
+        <button ion-button icon-only color="royal" (click)="add()">
+          <ion-icon name="add-circle"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+  <ion-content padding>
+    <div *ngIf="loading" style="text-align:center" class="center">
+      <ion-spinner name="bubbles"></ion-spinner>
+    </div>
+    <div *ngIf="!loading">
+      <ion-list *ngIf="!selectedClient">
+          <ion-item *ngFor="let client of clients; let i=index">
+            {{i+1}}.&nbsp;{{client.name}}
+            <diV style="float:right">
+              <button  ion-button icon-end color="secondary" (click)="select(client)" round>Editar</button>
+              <button  ion-button icon-end color="danger" round (click)="delete(client.clientid)">Eliminar</button>    
+            </diV>
+          </ion-item>
+      </ion-list>
+      <div *ngIf="selectedClient">
+          <form (ngSubmit)="saveForm()" #clientForm="ngForm">
+            <ion-item-divider color="light" *ngIf="selectedClient.clientid">
+                Editar Cliente 
+              </ion-item-divider>
+              <ion-item-divider color="light" *ngIf="!selectedClient.clientid">
+                Crear Cliente 
+              </ion-item-divider>
+            <ion-item>
+              <ion-label>Nombre</ion-label>
+              <ion-input type="text" required #name="ngModel" [(ngModel)]="selectedClient.name" name="name"></ion-input>
+            </ion-item>
+            <div [hidden]="name.valid || name.pristine"
+                class="alert alert-danger">
+                Nombre es requerido
+            </div>
+            <ion-item>
+              <ion-label>Descripcion</ion-label>
+              <ion-input type="text"  [(ngModel)]="selectedClient.description" name="description"></ion-input>
+            </ion-item>
+            <button ion-button [disabled]="!clientForm.form.valid" type="submit" block>Guardar</button>
+            <button ion-button color="danger" type="button" (click)="cancelForm()" block>Cancelar</button>
+          </form>
+          <shops [clientid]="selectedClient.clientid" (onSelectShop)="onShopSelect($event)"></shops>
+        </div>
+    </div>
+    
+  </ion-content>
+  

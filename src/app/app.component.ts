@@ -14,6 +14,8 @@ import { stock } from '../data/stock';
 import { LoginFlatPage } from '../pages/login-flat-page/login-flat-page';
 import { AuthService } from '../providers/auth.service';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
+import { ClientsPage } from '../pages/clients/clients';
+import { UsersPage } from '../pages/users/users';
 
 @Component({
   templateUrl: 'app.html'
@@ -31,10 +33,11 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Inicio', component: HomePage, icon:'home' },
+      { title: 'Usuarios', component: UsersPage, icon: 'people'},
       { title: 'Pronóstico', component: PronosticoPage, icon: 'analytics'},
     /*   { title: 'Degustaciones', component: TastingsPage, icon:'pizza'},
       { title: 'Ventas', component: HomePage, icon:'cash'}, */
-      { title: 'Tiendas', component: ShopsPage, icon: 'basket'},
+      { title: 'Clientes', component: ClientsPage, icon: 'basket'},
       { title: 'Productos', component: ProductsPage, icon: 'pricetags'}
     ];
 
@@ -55,9 +58,16 @@ export class MyApp {
   }
 
   openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    if(this.auth.isAuthorized(page.component.name)){
+      this.nav.setRoot(page.component);
+    } else {
+      let alert = this.alertCtrl.create({
+          title: 'Autorización',
+          subTitle: 'No tiene permisos para acceder a esa página',
+          buttons: ['Aceptar']
+      });
+      alert.present();
+    }
   }
 
   onLogout() {

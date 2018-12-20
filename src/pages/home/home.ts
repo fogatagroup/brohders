@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { quartil } from '../../utils/utils.functions';
+import { AuthService } from '../../providers/auth.service';
 
 @Component({
   selector: 'page-home',
@@ -19,7 +20,7 @@ export class HomePage {
   values=[21,34,30,29,33,27]
   
   
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, private authService: AuthService) {
     this.convert2object(this.matriz)
         
   }
@@ -38,4 +39,8 @@ export class HomePage {
     console.log(list)
   }
 
+  get userName(): String {
+    let user = this.authService.loggedUser;
+    return user.user ? `${user.user.name} ${user.user.lastname || ""}` : ""
+  }
 }

@@ -1,0 +1,80 @@
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Usuarios</ion-title>
+      <ion-buttons end>
+          <button ion-button icon-only color="royal" (click)="add()">
+            <ion-icon name="add-circle"></ion-icon>
+          </button>
+        </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+  <ion-content padding>
+    <div *ngIf="loading" style="text-align:center" class="center">
+      <ion-spinner name="bubbles"></ion-spinner>
+    </div>
+    <div *ngIf="!loading">
+      <ion-list *ngIf="!selectedUser">
+          <ion-item *ngFor="let user of users; let i=index">
+            {{i+1}}.&nbsp;{{user.username}} - {{user.name}} {{user.lastname}}
+            <diV style="float:right">
+              <button  ion-button icon-end color="secondary" (click)="select(user)" round>Editar</button>
+              <button  ion-button icon-end color="danger" (click)="delete(user.userid)" round>Eliminar</button>    
+            </diV>
+          </ion-item>
+      </ion-list>
+      <form (ngSubmit)="saveForm()" *ngIf="selectedUser" #userForm="ngForm">
+          <ion-item-divider color="light" *ngIf="selectedUser.userid">
+              Editar usuario 
+            </ion-item-divider>
+            <ion-item-divider color="light" *ngIf="!selectedUser.userid">
+              Crear usuario 
+            </ion-item-divider>
+        <ion-item>
+          <ion-label>Usuario</ion-label>
+          <ion-input type="text" [readonly]="selectedUser.userid" required #username="ngModel" [(ngModel)]="selectedUser.username" name="username"></ion-input>
+        </ion-item>
+        <div [hidden]="username.valid || username.pristine"
+            class="alert alert-danger">
+            Usuario es requerido
+        </div>
+        <ion-item>
+            <ion-label>Nombre</ion-label>
+            <ion-input type="text" required #name="ngModel" [(ngModel)]="selectedUser.name" name="name"></ion-input>
+          </ion-item>
+          <div [hidden]="name.valid || name.pristine"
+              class="alert alert-danger">
+              Nombre es requerido
+          </div>
+            <ion-item>
+                <ion-label>Rol</ion-label>
+                <ion-select required #role="ngModel" [(ngModel)]="selectedUser.roleid"  name="roleid" cancelText="Cancelar" okText="Aceptar">
+                  <ion-option *ngFor="let role of roles" [value]="role.roleid">{{role.name}}</ion-option>
+                </ion-select>
+              </ion-item>
+              
+        <ion-item>
+          <ion-label>Apellido</ion-label>
+          <ion-input type="text"  [(ngModel)]="selectedUser.lastname" name="lastname"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+              <span *ngIf="!selectedUser.userid">Nueva&nbsp;</span>
+              Contraseña
+              <span *ngIf="selectedUser.userid">&nbsp;(Cambiar solo para reseteo)</span>
+            </ion-label>
+          <ion-input type="password" #password="ngModel" required [(ngModel)]="selectedUser.password_hash" name="password_hash"></ion-input>
+          <div [hidden]="password.valid || password.pristine"
+              class="alert alert-danger">
+              Constraseña es requerido
+          </div>
+        </ion-item>
+        <button ion-button [disabled]="!userForm.form.valid" type="submit" block>Guardar</button>
+        <button ion-button color="danger" type="button" (click)="cancelForm()" block>Cancelar</button>
+      </form>
+    </div>
+    
+  </ion-content>
+  

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 import { AlertController } from 'ionic-angular';
 import { serverUrl } from '../config/config';
 
@@ -15,6 +16,7 @@ export class HttpService {
   constructor(private http: Http, private alertCtrl:AlertController) { }
 
   get(url: string): Observable<any> {
+    console.log("GETTING:", url);
     var headers = new Headers({ 'Content-Type': 'application/json', 'method':'GET'});
     return this.http.get(`${serverUrl}/${url}`, { headers: headers })
       .map(response => response)
@@ -31,9 +33,9 @@ export class HttpService {
             }
         )
   }
-  put(url: string, body: any) {
+  put(url: string, id: number, body: any) {
     var headers = new Headers({ 'Content-Type': 'application/json'});
-    return this.http.put(`${serverUrl}/${url}`, body, { headers: headers })
+    return this.http.put(`${serverUrl}/${url}/${id}`, body, { headers: headers })
       .map(response => response)
       .catch(
         error => {
@@ -59,13 +61,50 @@ export class HttpService {
                 buttons: ['Aceptar']
               });
               alert.present();
+              return Observable.throw(error)
+            }
+        )
+  }
+
+  login(url: string, body: any) {
+    var headers = new Headers({ 'Content-Type': 'application/json'});
+    return this.http.post(`${serverUrl}/${url}`, body, { headers: headers })
+      .map(response => response)
+      .catch(
+        error => {
+            let alert = this.alertCtrl.create({
+                title: error.status == 500 ? 'Problemas de conexión' : "Credenciales incorrectas",
+                subTitle: error.status == 500 ? 'Intente nuevamente' : "Intente nuevamente o contacte a su administrador",
+                buttons: ['Aceptar']
+              });
+              alert.present();
+              return Observable.throw(error)
+            }
+        )
+  }
+
+
+  delete(url: string, id: number) {
+    
+    var headers = new Headers({ 'Content-Type': 'application/json'});
+    return this.http.delete(`${serverUrl}/${url}/${id}`, { headers: headers })
+      .map(response => response)
+      .catch(
+        error => {
+            let alert = this.alertCtrl.create({
+                title: 'Problemas de Conexión',
+                subTitle: 'Intente recargar la página',
+                buttons: ['Aceptar']
+              });
+              alert.present();
             return Observable.throw(error)
             }
         )
   }
-  delete(url: string) {
+
+  patch<T>(url: string, id: number, body: Partial<T>) {
     var headers = new Headers({ 'Content-Type': 'application/json'});
-    return this.http.delete(`${serverUrl}/${url}`, { headers: headers })
+    return this.http.patch(`${serverUrl}/${url}/${id}`, body, { headers: headers })
       .map(response => response)
       .catch(
         error => {

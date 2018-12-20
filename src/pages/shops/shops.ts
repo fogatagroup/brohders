@@ -17,7 +17,6 @@ export class ShopsPage {
   }
 
   onClickItem(event, item:Shop){
-    console.log("are you kidding me")
     this.navCtrl.push(TastingsPage, {
       item: item
     });

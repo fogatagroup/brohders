@@ -2,7 +2,10 @@ export class Shop {
     shopid: number; 
     name: string; 
     description:string;
-  /*   createdon: any; 
+    /*
+    createdon: number;
+    createdby: string;
+     createdon: any; 
     cratedby:number; 
     modifiedon:any; 
     modifiedby:number; 

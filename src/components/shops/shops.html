@@ -1,0 +1,39 @@
+<!-- Generated template for the ShopsComponent component -->
+<ion-list inset>
+    <ion-item-divider color="light">
+      Tiendas
+      <ion-icon name="add-circle" item-end (click)="add()"></ion-icon>
+    </ion-item-divider>
+    <div *ngIf="selectedItem">
+        <form (ngSubmit)="saveForm()" #shopForm="ngForm">
+            <ion-item-divider color="light">
+              Crear Tienda
+            </ion-item-divider>
+          <ion-item>
+            <ion-label>Nombre</ion-label>
+            <ion-input type="text" required #name="ngModel" [(ngModel)]="selectedItem.name" name="name"></ion-input>
+          </ion-item>
+          <div [hidden]="name.valid || name.pristine"
+              class="alert alert-danger">
+              Nombre es requerido
+          </div>
+          <ion-item>
+            <ion-label>Descripcion</ion-label>
+            <ion-input type="text"  [(ngModel)]="selectedItem.description" name="description"></ion-input>
+          </ion-item>
+          <button ion-button [disabled]="!shopForm.form.valid" type="submit" >Guardar</button>
+          <button ion-button color="danger" type="button" (click)="cancelForm()">Cancelar</button>
+        </form>
+      </div>
+    <div *ngIf="!selectedItem">
+        <ion-item>
+            <ion-searchbar [(ngModel)]="search" placeholder="Buscar..."></ion-searchbar>
+          </ion-item>
+          <button ion-item *ngFor="let item of shops | filter: 'name': search" (click)="onClickItem($event, item)" >
+              {{ item.name }}
+              <div style="float:right">
+                <ion-icon name="arrow-dropright"></ion-icon>
+              </div>
+          </button>
+    </div>
+  </ion-list>

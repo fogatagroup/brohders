@@ -6,6 +6,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { Product } from '../../models/products';
 import { products } from '../../data/products';
 import { weekdays } from '../../config/config';
+import { HttpService } from '../../providers/http.service';
 
 @Component({
   selector: 'page-tastings',
@@ -15,6 +16,7 @@ export class TastingsPage implements OnInit {
   
   private loading:boolean=false;
   private selectedItem: any;
+  private selectedItemEdit: any;
   private shelveList:Shelve[]=[];
   private tastingList:Tastings[]=[];
   private aumentoList:Tasting_Increase[]=[];
@@ -23,14 +25,17 @@ export class TastingsPage implements OnInit {
   private tastingsForm: FormGroup;
   private increaseForm: FormGroup;
   private stockForm: FormGroup;
+  private generalForm: FormGroup;
   private products:Product[]=[];
   private weekdays=weekdays;
   private selectedTastings:Tastings[]=[];
   private isValue:boolean=false;
   private day:number;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private fb: FormBuilder, public loadingCtrl: LoadingController) {
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,private fb: FormBuilder, public loadingCtrl: LoadingController, private http: HttpService) {
     this.selectedItem = navParams.get('item');
+    this.selectedItemEdit = {...this.selectedItem};
     this.getData();
   }
 
@@ -70,6 +75,11 @@ export class TastingsPage implements OnInit {
       var obj1={};
       obj1[t.stockid]=t.cantity;
       this.stockForm.patchValue(obj1);
+    })
+
+    this.generalForm = this.fb.group({
+      name: new FormControl('', [Validators.required]).setValue(this.selectedItem.name),
+      description: new FormControl('', [Validators.required]).setValue(this.selectedItem.description)
     })
   }
 
@@ -156,5 +166,17 @@ export class TastingsPage implements OnInit {
     })
     this.isValue=true;
 
+  }
+
+  onSaveGeneral(){
+    this.showLoading();
+    this.http.put("shops",this.selectedItemEdit.shopid, {
+      name: this.selectedItemEdit.name,
+      description: this.selectedItemEdit.description
+    }).subscribe(res => {
+      this.selectedItem.name = this.selectedItemEdit.name;
+      this.selectedItem.description = this.selectedItemEdit.description;
+      this.navCtrl.pop();
+    })
   }
 }

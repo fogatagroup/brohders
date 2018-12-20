@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Configuración</ion-title>
+    <ion-title>Configuración {{selectedItem.name}}</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
@@ -13,6 +13,9 @@
   <div *ngIf="!loading">
       <div padding>
         <ion-segment [(ngModel)]="shop">
+          <ion-segment-button value="general">
+            General
+          </ion-segment-button>
           <ion-segment-button value="tastings">
             Degustaciones
           </ion-segment-button>
@@ -29,6 +32,20 @@
       </div>
       
       <div [ngSwitch]="shop">
+        <div *ngSwitchCase="'general'">
+            <form #generalForm="ngForm" (ngSubmit)="onSaveGeneral()" *ngIf="selectedItem">
+              <ion-list> 
+                <ion-item>
+                    <ion-input [(ngModel)]="selectedItemEdit.name" name="name" placeholder="Nombre" required></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-input [(ngModel)]="selectedItemEdit.description" name="description" placeholder="Descripcion" required></ion-input>
+                </ion-item>
+              </ion-list>
+              <button ion-button full type="submit" [disabled]="!generalForm.form.valid">Guardar</button>
+              <button ion-button full type="button" (click)="navCtrl.pop()" color="danger">Cancelar</button>
+            </form>
+        </div>
         <div *ngSwitchCase="'tastings'">
           <ion-list>
             <ion-item>
