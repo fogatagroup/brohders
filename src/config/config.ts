@@ -1,4 +1,4 @@
-export var serverUrl='http://localhost:3000';
+export var serverUrl='http://localhost:3002';
 
 
 export var weekdays=[
@@ -30,3 +30,5 @@ export var weekdays=[
         'day':'DOMINGO',
         'value': 7,
     }]
+
+export const inforceDevice = false;

@@ -5,6 +5,7 @@ import { HttpService } from '../../providers/http.service';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { Role } from '../../models/roles';
 import { updateDate } from 'ionic-angular/util/datetime-util';
+import { Device } from '../../models/device';
 
 /**
  * Generated class for the UsersPage page.
@@ -22,6 +23,7 @@ export class UsersPage {
 
   users: User[];
   roles: Role[];
+  devices: Device[];
   selectedUser: User;
 
   constructor(public navCtrl: NavController,  private http: HttpService, private alertCtrl: AlertController) {
@@ -31,6 +33,7 @@ export class UsersPage {
   ngOnInit(): void {
     this.fetch();
     this.fetchRoles();
+    this.fetchDevices();
   }
 
   delete(id: number){
@@ -60,6 +63,12 @@ export class UsersPage {
     })
   }
 
+  fetchDevices(){
+    this.http.get("devices").subscribe(res => {
+      this.devices = res.json() as Device[];
+    })
+  }
+
   fetch(){
     this.http.get("users").subscribe(res => {
       this.users = res.json() as User[];
@@ -85,7 +94,8 @@ export class UsersPage {
       name: this.selectedUser.name,
       lastname: this.selectedUser.lastname,
       password_hash: this.selectedUser.password_hash,
-      roleid: this.selectedUser.roleid
+      roleid: this.selectedUser.roleid,
+      deviceid: this.selectedUser.deviceid
     } as User;
     if(user){
       this.http.patch<User>("users", user.userid, updatedUser).subscribe(res => {

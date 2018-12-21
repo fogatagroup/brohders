@@ -1,0 +1,57 @@
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Dispositivos</ion-title>
+      <ion-buttons end>
+          <button ion-button icon-only color="royal" (click)="add()">
+            <ion-icon name="add-circle"></ion-icon>
+          </button>
+        </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+  <ion-content padding>
+    <div *ngIf="loading" style="text-align:center" class="center">
+      <ion-spinner name="bubbles"></ion-spinner>
+    </div>
+    <div *ngIf="!loading">
+      <ion-list *ngIf="!selectedItem">
+          <ion-item *ngFor="let item of items; let i=index">
+            {{i+1}}.&nbsp;{{item.serial}} - {{item.description}}
+            <diV style="float:right">
+              <button  ion-button icon-end color="secondary" (click)="select(item)" round>Editar</button>
+              <button  ion-button icon-end color="danger" (click)="delete(item.deviceid)" round>Eliminar</button>    
+            </diV>
+          </ion-item>
+      </ion-list>
+      <form (ngSubmit)="saveForm()" *ngIf="selectedItem" #deviceForm="ngForm">
+          <ion-item-divider color="light" *ngIf="selectedItem.deviceid">
+              Editar Dispositivo 
+            </ion-item-divider>
+            <ion-item-divider color="light" *ngIf="!selectedItem.deviceid">
+              Crear Dispositivo 
+            </ion-item-divider>
+        <ion-item>
+          <ion-label>Serial</ion-label>
+          <ion-input type="text" required #serial="ngModel" [(ngModel)]="selectedItem.serial" name="serial"></ion-input>
+        </ion-item>
+        <div [hidden]="serial.valid || serial.pristine"
+            class="alert alert-danger">
+            Serial es requerido
+        </div>
+        <ion-item>
+          <ion-label>Descripción</ion-label>
+          <ion-input type="text" required #description="ngModel" [(ngModel)]="selectedItem.description" name="description"></ion-input>
+        </ion-item>
+        <div [hidden]="description.valid || description.pristine"
+            class="alert alert-danger">
+            Descripcion es requerido
+        </div>
+        <button ion-button [disabled]="!deviceForm.form.valid" type="submit" block>Guardar</button>
+        <button ion-button color="danger" type="button" (click)="cancelForm()" block>Cancelar</button>
+      </form>
+    </div>
+    
+  </ion-content>
+  

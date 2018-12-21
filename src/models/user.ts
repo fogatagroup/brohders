@@ -1,4 +1,5 @@
 import { Role } from "./roles";
+import { Device } from "./device";
 
 export class User {
     userid: number;
@@ -7,5 +8,7 @@ export class User {
     lastname?: string;
     password_hash?: string;
     roleid: number;
+    deviceid?: number;
     role?: Role;
+    device?: Device;
 }

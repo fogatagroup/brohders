@@ -54,6 +54,13 @@
                   <ion-option *ngFor="let role of roles" [value]="role.roleid">{{role.name}}</ion-option>
                 </ion-select>
               </ion-item>
+
+              <ion-item>
+                  <ion-label>Dispositivo Asignado</ion-label>
+                  <ion-select #device="ngModel" [(ngModel)]="selectedUser.deviceid"  name="deviceid" cancelText="Cancelar" okText="Aceptar">
+                    <ion-option *ngFor="let device of devices" [value]="device.deviceid">{{device.serial}} - {{device.description}}</ion-option>
+                  </ion-select>
+                </ion-item>
               
         <ion-item>
           <ion-label>Apellido</ion-label>
@@ -73,6 +80,7 @@
         </ion-item>
         <button ion-button [disabled]="!userForm.form.valid" type="submit" block>Guardar</button>
         <button ion-button color="danger" type="button" (click)="cancelForm()" block>Cancelar</button>
+        <user-shops [userid]="selectedUser.userid"></user-shops>
       </form>
     </div>
     

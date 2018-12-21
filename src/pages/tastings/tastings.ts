@@ -84,11 +84,19 @@ export class TastingsPage implements OnInit {
   }
 
   getData(){
-    this.products=products;
+    this.http.get("products").subscribe(res => {
+      this.products = res.json() as Product[];
+    })
+    this.fetchTastings();
     this.shelveList=JSON.parse(localStorage.getItem('Shelves'));
-    this.tastingList=JSON.parse(localStorage.getItem('Tastings'));
     this.aumentoList=JSON.parse(localStorage.getItem('Increase'));
     this.stockList=JSON.parse(localStorage.getItem("Stock"));
+  }
+
+  fetchTastings(){
+    this.http.get(`shops/${this.selectedItem.shopid}/tastings`).subscribe(res => {
+      this.tastingList = res.json() as Tastings[];
+    })
   }
 
   showLoading() {
@@ -119,13 +127,40 @@ export class TastingsPage implements OnInit {
 
   onForm(value){
     this.showLoading()
-    this.tastingList.forEach(t=>{
+    console.log(this.tastingsForm.value);
+    this.selectedTastings.forEach(t=>{
       if(value[t.tastingid]!=undefined){
         t.isactive=value[t.tastingid];
       }
     })
-    localStorage.setItem("Tastings",JSON.stringify(this.tastingList));
-    this.getData();
+    for(let i = 0; this.selectedTastings.length > i; i++){
+      let s = this.selectedTastings[i];
+      let newTasting = {
+        productid: s.productid,
+        weekday: s.weekday,
+        isactive: s.isactive
+      }
+      if(s.tastingid <= 0){
+        let newTasting = {
+          productid: s.productid,
+          weekday: s.weekday,
+          isactive: s.isactive
+        }
+        this.http.post(`shops/${this.selectedItem.shopid}/tastings`, newTasting).subscribe(res=>{
+          console.log("SAVED", res.json().tastingid);
+          this.selectedTastings[i] = res.json();
+        });
+      } else {
+        console.log("PATCHING TASTING");
+        this.http.patchAll<Tastings>(`shops/${this.selectedItem.shopid}/tastings/${s.productid}`, s).subscribe(res => {
+          console.log("PATCHED", res.json().count);
+        });
+      }
+    }
+    console.log(this.selectedTastings);
+    this.fetchTastings();
+    this.isValue = false;
+    this.day = null;
   }
 
   onFormIncrease(value){
@@ -151,19 +186,29 @@ export class TastingsPage implements OnInit {
   }
 
   onChangeDay(value){
-    console.log(value,"hola soy el value")
-    this.tastingList=JSON.parse(localStorage.getItem('Tastings'));
+    console.log(this.tastingList);
     this.selectedTastings=this.tastingList.filter(t=>t.weekday==value);
+    let tastingsNotCreated = this.products.filter(p => this.selectedTastings.map(t => t.productid).indexOf(p.productid) == -1);
+    tastingsNotCreated.forEach((p,i) => {
+      this.selectedTastings.push({
+        tastingid: 0 - i,
+        weekday: value,
+        productid: p.productid,
+        isactive: false
+      } as Tastings)
+    })
     var object={};
     this.selectedTastings.forEach(t=>{
       object[t.tastingid]=new FormControl('', [Validators.required]);
     })
+
     this.tastingsForm=this.fb.group(object);
     this.selectedTastings.forEach(t=>{
       var obj1={};
       obj1[t.tastingid]=t.isactive;
       this.tastingsForm.patchValue(obj1);
     })
+    console.log(this.selectedTastings);
     this.isValue=true;
 
   }

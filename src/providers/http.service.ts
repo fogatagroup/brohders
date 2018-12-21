@@ -118,4 +118,21 @@ export class HttpService {
             }
         )
   }
+
+  patchAll<T>(url: string, body: Partial<T>) {
+    var headers = new Headers({ 'Content-Type': 'application/json'});
+    return this.http.patch(`${serverUrl}/${url}`, body, { headers: headers })
+      .map(response => response)
+      .catch(
+        error => {
+            let alert = this.alertCtrl.create({
+                title: 'Problemas de Conexión',
+                subTitle: 'Intente recargar la página',
+                buttons: ['Aceptar']
+              });
+              alert.present();
+            return Observable.throw(error)
+            }
+        )
+  }
 }

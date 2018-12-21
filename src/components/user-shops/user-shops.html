@@ -1,0 +1,40 @@
+<ion-list inset>
+    <ion-item-divider color="light">
+      Tiendas asignadas
+      <ion-icon name="add-circle" item-end (click)="add()"></ion-icon>
+    </ion-item-divider>
+    <div *ngIf="selectedItem">
+        <form (ngSubmit)="saveForm()" #shopForm="ngForm">
+            <ion-item-divider color="light">
+              Agregar Tienda
+            </ion-item-divider>
+          <ion-item>
+            <ion-label>Tienda</ion-label>
+            <ion-select type="text" required #shopid="ngModel" [(ngModel)]="selectedItem.shopid" name="shopid">
+              <ion-option *ngFor="let s of shops" [value]="s.shopid">{{s.name}}</ion-option>
+            </ion-select>
+          </ion-item>
+          <div [hidden]="shopid.valid || shopid.pristine"
+              class="alert alert-danger">
+              Tienda es requerido
+          </div>
+          <button ion-button [disabled]="!shopForm.form.valid" type="submit" >Guardar</button>
+          <button ion-button color="danger" type="button" (click)="cancelForm()">Cancelar</button>
+        </form>
+      </div>
+    <div *ngIf="!selectedItem">
+        <ion-list *ngIf="!selectedProduct">
+            <ion-item>
+                <ion-searchbar [(ngModel)]="search" placeholder="Buscar..."></ion-searchbar>
+              </ion-item>
+            <ion-item *ngFor="let item of usershops | filter: 'name': search">
+              {{ item.name }}
+              <diV style="float:right">
+                <button  type="button" ion-button icon-end icon-only color="danger" (click)="deleteShop(item.shopid)">
+                  <ion-icon name="trash"></ion-icon>
+                </button>    
+              </diV>
+            </ion-item>
+        </ion-list>
+    </div>
+  </ion-list>

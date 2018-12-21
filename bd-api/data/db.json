@@ -4,7 +4,10 @@
     "User": 4,
     "Role": 3,
     "Shop": 12,
-    "Product": 5
+    "Product": 5,
+    "UserShop": 6,
+    "Device": 2,
+    "Tasting": 22
   },
   "models": {
     "Client": {
@@ -12,12 +15,12 @@
       "11": "{\"name\":\"Pricesmart\",\"isdeleted\":false,\"isactive\":true,\"clientid\":11}"
     },
     "User": {
-      "1": "{\"username\":\"Pruebas\",\"password_hash\":\"9f45c1dd7d6a12c83540afd1b5419b87\",\"name\":\"Arturo\",\"lastname\":\"Cruz\",\"userid\":1,\"roleid\":1}",
+      "1": "{\"username\":\"Pruebas\",\"password_hash\":\"81dc9bdb52d04dc20036dbd8313ed055\",\"name\":\"Arturo\",\"lastname\":\"Cruz\",\"userid\":1,\"roleid\":1,\"deviceid\":1}",
       "2": "{\"username\":\"pruebabd\",\"password_hash\":\"a54e2660f72fc0c2441618203298b8f6\",\"roleid\":2,\"name\":\"Admin Prueba BD\",\"userid\":2}",
-      "3": "{\"username\":\"spruebabd\",\"password_hash\":\"289a1a486fae597cdae54e280c0d5f36\",\"roleid\":1,\"name\":\"Super Admin Prueba BD\",\"userid\":3}"
+      "3": "{\"username\":\"spruebabd\",\"password_hash\":\"827ccb0eea8a706c4c34a16891f84e7b\",\"roleid\":1,\"name\":\"Super Admin Prueba BD\",\"userid\":3}"
     },
     "Role": {
-      "1": "{\"name\":\"Super Admin\",\"pages\":[\"home\",\"clients\",\"login-flat-page\",\"products\",\"shops\",\"tastings\",\"users\"],\"isdeleted\":false,\"isactive\":true,\"roleid\":1}",
+      "1": "{\"name\":\"Super Admin\",\"pages\":[\"home\",\"clients\",\"login-flat-page\",\"products\",\"shops\",\"tastings\",\"users\",\"devices\"],\"isdeleted\":false,\"isactive\":true,\"roleid\":1}",
       "2": "{\"name\":\"Admin\",\"pages\":[\"home\",\"clients\",\"login-flat-page\",\"shops\",\"tastings\"],\"isdeleted\":false,\"isactive\":true,\"roleid\":2}"
     },
     "Shop": {
@@ -29,7 +32,7 @@
       "6": "{\"name\":\"PSMT - Z10\",\"clientid\":4,\"isdeleted\":false,\"isactive\":true,\"description\":\"Pricesmart zona 10\",\"shopid\":6}",
       "7": "{\"name\":\"PSMT - Fraijanes\",\"clientid\":4,\"isdeleted\":false,\"isactive\":true,\"description\":\"Pricesmart fraijanes km 23\",\"shopid\":7}",
       "8": "{\"name\":\"PSMT - Majadas\",\"clientid\":4,\"isdeleted\":false,\"isactive\":true,\"description\":\"Pricesmart Majadas\",\"shopid\":8}",
-      "9": "{\"name\":\"PSMT Z10\",\"clientid\":11,\"isdeleted\":false,\"isactive\":true,\"description\":\"Pricesmart zona 10\",\"shopid\":9}",
+      "9": "{\"shopid\":9,\"name\":\"PSMT Z10\",\"isdeleted\":false,\"isactive\":true,\"description\":\"Pricesmart zona 10\"}",
       "10": "{\"name\":\"PSMT - MAJADAS\",\"clientid\":11,\"isdeleted\":false,\"isactive\":true,\"description\":\"Pricesmart majadas\",\"shopid\":10}",
       "11": "{\"name\":\"PSMT - Fraijanes\",\"clientid\":11,\"isdeleted\":false,\"isactive\":true,\"description\":\"Pricesmart Fraijanes\",\"shopid\":11}"
     },
@@ -38,6 +41,36 @@
       "2": "{\"name\":\"C/S\",\"description\":\"Con semillas\",\"isdeleted\":false,\"isactive\":true,\"productid\":2}",
       "3": "{\"name\":\"AV\",\"description\":\"Avena\",\"isdeleted\":false,\"isactive\":true,\"productid\":3}",
       "4": "{\"name\":\"Pruebas\",\"description\":\"Pruebas\",\"isdeleted\":false,\"isactive\":true,\"productid\":4}"
+    },
+    "UserShop": {
+      "2": "{\"userid\":1,\"shopid\":2,\"usershopid\":2}",
+      "5": "{\"userid\":1,\"shopid\":11,\"usershopid\":5}"
+    },
+    "Device": {
+      "1": "{\"serial\":\"123456789\",\"description\":\"Telefono Samsung\",\"isactive\":true,\"isdeleted\":false,\"deviceid\":1}"
+    },
+    "Tasting": {
+      "1": "{\"shopid\":1,\"productid\":1,\"weekday\":2,\"isdeleted\":false,\"isactive\":true,\"tastingid\":1}",
+      "2": "{\"tastingid\":2,\"shopid\":9,\"productid\":1,\"weekday\":1,\"isdeleted\":false,\"isactive\":false}",
+      "6": "{\"shopid\":3,\"productid\":1,\"weekday\":1,\"isdeleted\":false,\"isactive\":true,\"tastingid\":6}",
+      "7": "{\"shopid\":3,\"productid\":2,\"weekday\":1,\"isdeleted\":false,\"isactive\":true,\"tastingid\":7}",
+      "8": "{\"shopid\":3,\"productid\":3,\"weekday\":1,\"isdeleted\":false,\"isactive\":true,\"tastingid\":8}",
+      "9": "{\"shopid\":3,\"productid\":4,\"weekday\":1,\"isdeleted\":false,\"isactive\":false,\"tastingid\":9}",
+      "10": "{\"shopid\":3,\"productid\":1,\"weekday\":4,\"isdeleted\":false,\"isactive\":true,\"tastingid\":10}",
+      "11": "{\"shopid\":3,\"productid\":2,\"weekday\":4,\"isdeleted\":false,\"isactive\":false,\"tastingid\":11}",
+      "12": "{\"shopid\":3,\"productid\":3,\"weekday\":4,\"isdeleted\":false,\"isactive\":false,\"tastingid\":12}",
+      "13": "{\"shopid\":3,\"productid\":4,\"weekday\":4,\"isdeleted\":false,\"isactive\":true,\"tastingid\":13}",
+      "14": "{\"shopid\":9,\"productid\":1,\"weekday\":2,\"isdeleted\":false,\"isactive\":false,\"tastingid\":14}",
+      "15": "{\"shopid\":9,\"productid\":2,\"weekday\":2,\"isdeleted\":false,\"isactive\":true,\"tastingid\":15}",
+      "16": "{\"shopid\":9,\"productid\":3,\"weekday\":2,\"isdeleted\":false,\"isactive\":true,\"tastingid\":16}",
+      "17": "{\"shopid\":9,\"productid\":4,\"weekday\":2,\"isdeleted\":false,\"isactive\":true,\"tastingid\":17}",
+      "18": "{\"shopid\":9,\"productid\":1,\"weekday\":5,\"isdeleted\":false,\"isactive\":false,\"tastingid\":18}",
+      "19": "{\"shopid\":9,\"productid\":2,\"weekday\":5,\"isdeleted\":false,\"isactive\":true,\"tastingid\":19}",
+      "20": "{\"shopid\":9,\"productid\":3,\"weekday\":5,\"isdeleted\":false,\"isactive\":true,\"tastingid\":20}",
+      "21": "{\"shopid\":9,\"productid\":4,\"weekday\":5,\"isdeleted\":false,\"isactive\":false,\"tastingid\":21}",
+      "-1": "{\"tastingid\":-1,\"shopid\":9,\"productid\":2,\"weekday\":1,\"isdeleted\":false,\"isactive\":true}",
+      "-2": "{\"tastingid\":-2,\"shopid\":9,\"productid\":3,\"weekday\":1,\"isdeleted\":false,\"isactive\":true}",
+      "-3": "{\"tastingid\":-3,\"shopid\":9,\"productid\":4,\"weekday\":1,\"isdeleted\":false,\"isactive\":false}"
     }
   }
 }

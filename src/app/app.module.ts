@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { Uid } from '@ionic-native/uid';
+import { AndroidPermissions } from '@ionic-native/android-permissions';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -20,6 +22,7 @@ import { ClientsPage } from '../pages/clients/clients';
 import { ComponentsModule } from '../components/components.module';
 import { PipesModule } from '../pipes/pipes.module';
 import { UsersPage } from '../pages/users/users';
+import { DevicesPage } from '../pages/devices/devices';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,8 @@ import { UsersPage } from '../pages/users/users';
     TastingsPage,
     PronosticoPage,
     LoginFlatPage,
-    UsersPage
+    UsersPage,
+    DevicesPage
   ],
   imports: [
     HttpModule,
@@ -52,9 +56,12 @@ import { UsersPage } from '../pages/users/users';
     PronosticoPage,
     ClientsPage,
     LoginFlatPage,
-    UsersPage
+    UsersPage,
+    DevicesPage
   ],
   providers: [
+    Uid,
+    AndroidPermissions,
     StatusBar,
     SplashScreen,
     HttpService,

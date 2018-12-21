@@ -24,7 +24,8 @@ export class AuthService {
     login(params: any): Promise<any>{
         const data = {
             username: params.user,
-            password_hash: params.pass
+            password_hash: params.pass,
+            imei: params.imei
         }
         return new Promise((resolve, reject) => {
             this.http.login(`users/login`,data).subscribe( response => {

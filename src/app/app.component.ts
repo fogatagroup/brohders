@@ -16,6 +16,7 @@ import { AuthService } from '../providers/auth.service';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { ClientsPage } from '../pages/clients/clients';
 import { UsersPage } from '../pages/users/users';
+import { DevicesPage } from '../pages/devices/devices';
 
 @Component({
   templateUrl: 'app.html'
@@ -38,7 +39,8 @@ export class MyApp {
     /*   { title: 'Degustaciones', component: TastingsPage, icon:'pizza'},
       { title: 'Ventas', component: HomePage, icon:'cash'}, */
       { title: 'Clientes', component: ClientsPage, icon: 'basket'},
-      { title: 'Productos', component: ProductsPage, icon: 'pricetags'}
+      { title: 'Productos', component: ProductsPage, icon: 'pricetags'},
+      { title: 'Dispositivos', component: DevicesPage, icon: "phone-portrait"}
     ];
 
   }

@@ -18,15 +18,19 @@ import {
   requestBody,
 } from '@loopback/rest';
 import { User, LoggedUser } from '../models';
-import { UserRepository, RoleRepository } from '../repositories';
+import { UserRepository, RoleRepository, DeviceRepository } from '../repositories';
 import { Md5 } from 'md5-typescript';
 import { Role } from '../models/role.model';
 export class UserController {
+
+
   constructor(
     @repository(UserRepository)
     public userRepository: UserRepository,
     @repository(RoleRepository)
-    public roleRepository: RoleRepository
+    public roleRepository: RoleRepository,
+    @repository(DeviceRepository)
+    public deviceRepository: DeviceRepository
   ) { }
 
   @post('/users', {
@@ -115,13 +119,26 @@ export class UserController {
       },
     },
   })
-  async login( @requestBody() user: Partial<User>): Promise<LoggedUser> {
+  async login( @requestBody() user: { username: string, password_hash: string, imei?: string }): Promise<LoggedUser> {
     console.log("LOGGING IN:", user);
+    let where: { username: string, password_hash: string, deviceid?: number } = {
+      username: user.username,
+      password_hash: user.password_hash ? Md5.init(user.password_hash) : '',
+    }
+    if (user.imei) {
+      let device = await this.deviceRepository.findOne({
+        where: {
+          serial: user.imei
+        }
+      })
+      if (!device) {
+        throw new EntityNotFoundError("Device", user.imei || "NOT SPECIFIED");
+      } else {
+        where.deviceid = device.deviceid;
+      }
+    }
     let filter = {
-      where: {
-        username: user.username,
-        password_hash: user.password_hash ? Md5.init(user.password_hash) : ''
-      },
+      where: where,
       fields: {
         password_hash: false
       }
@@ -155,6 +172,7 @@ export class UserController {
     user.name = newUser.name || user.name;
     user.lastname = newUser.lastname || user.lastname;
     user.roleid = newUser.roleid || user.roleid;
+    user.deviceid = newUser.deviceid || user.deviceid;
     await this.userRepository.updateById(id, user);
   }
 

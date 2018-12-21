@@ -5,3 +5,4 @@ export * from './role.controller';
 export * from './shop.controller';
 export * from './clientshops.controller';
 export * from './product.controller';
+export * from './device.controller';
