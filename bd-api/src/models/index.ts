@@ -7,3 +7,5 @@ export * from './product.model';
 export * from './device.model';
 export * from './user-shop.model';
 export * from './tasting.model';
+export * from './tasting-increase.model';
+export * from './shelve.model';

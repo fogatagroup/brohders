@@ -19,15 +19,16 @@
           <ion-segment-button value="tastings">
             Degustaciones
           </ion-segment-button>
-          <ion-segment-button value="aumento">
+          <ion-segment-button value="aumento" (ionSelect)="buildAumentoForm()">
             Aumento por Degustaciones
           </ion-segment-button>
-          <ion-segment-button value="shelves">
+          <ion-segment-button value="shelves" (ionSelect)="buildShelvesForm()">
             Estanterias
           </ion-segment-button>
-          <ion-segment-button value="stock">
+          <!-- EXISTENCIAS SE LLENA EN LA VENTA -->
+          <!--ion-segment-button value="stock">
               Existencias
-          </ion-segment-button>
+          </ion-segment-button-->
         </ion-segment>
       </div>
       
@@ -88,14 +89,14 @@
 
         <div *ngSwitchCase="'aumento'">
             <form [formGroup]="increaseForm" (ngSubmit)="onFormIncrease(increaseForm.value)">
-                <ion-list *ngFor="let item of aumentoList"> 
+              <ion-list *ngFor="let item of aumentoList">
                   {{convertIdToName(item.productid)}}
                   <ion-item>
                     <ion-label>Incremento</ion-label>
-                    <ion-input [formControlName]="item.tastingincreaseid" type="number"></ion-input>
+                    <ion-input [formControlName]="item.tastingincreaseid" (change)="$event.target.value = round($event.target.value)" type="number"></ion-input>
                   </ion-item>
                 </ion-list>
-                <button ion-button full type="submit">Guardar</button>
+                <button ion-button full [disabled]="!increaseForm.valid" type="submit">Guardar</button>
             </form>
         </div>
 

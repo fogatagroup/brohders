@@ -1,5 +1,7 @@
 import { Entity, model, property, hasMany } from '@loopback/repository';
 import { Tasting } from './tasting.model';
+import { TastingIncrease } from './tasting-increase.model';
+import { Shelve } from './shelve.model';
 
 @model()
 export class Shop extends Entity {
@@ -41,6 +43,16 @@ export class Shop extends Entity {
     keyTo: 'shopid'
   })
   tastings?: Tasting[]
+
+  @hasMany(() => TastingIncrease, {
+    keyTo: 'shopid'
+  })
+  tastingIncreases?: TastingIncrease[]
+
+  @hasMany(() => Shelve, {
+    keyTo: 'shopid'
+  })
+  shelves?: Shelve[]
 
   constructor(data?: Partial<Shop>) {
     super(data);

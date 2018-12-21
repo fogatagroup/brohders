@@ -6,3 +6,5 @@ export * from './product.repository';
 export * from './device.repository';
 export * from './user-shop.repository';
 export * from './tasting.repository';
+export * from './tasting-increase.repository';
+export * from './shelve.repository';

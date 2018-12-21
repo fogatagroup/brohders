@@ -7,7 +7,9 @@
     "Product": 5,
     "UserShop": 6,
     "Device": 2,
-    "Tasting": 22
+    "Tasting": 30,
+    "TastingIncrease": 8,
+    "Shelve": 5
   },
   "models": {
     "Client": {
@@ -68,9 +70,32 @@
       "19": "{\"shopid\":9,\"productid\":2,\"weekday\":5,\"isdeleted\":false,\"isactive\":true,\"tastingid\":19}",
       "20": "{\"shopid\":9,\"productid\":3,\"weekday\":5,\"isdeleted\":false,\"isactive\":true,\"tastingid\":20}",
       "21": "{\"shopid\":9,\"productid\":4,\"weekday\":5,\"isdeleted\":false,\"isactive\":false,\"tastingid\":21}",
+      "22": "{\"shopid\":10,\"productid\":1,\"weekday\":6,\"isdeleted\":false,\"isactive\":true,\"tastingid\":22}",
+      "23": "{\"shopid\":10,\"productid\":2,\"weekday\":6,\"isdeleted\":false,\"isactive\":true,\"tastingid\":23}",
+      "24": "{\"shopid\":10,\"productid\":3,\"weekday\":6,\"isdeleted\":false,\"isactive\":true,\"tastingid\":24}",
+      "25": "{\"shopid\":10,\"productid\":4,\"weekday\":6,\"isdeleted\":false,\"isactive\":true,\"tastingid\":25}",
+      "26": "{\"shopid\":10,\"productid\":1,\"weekday\":2,\"isdeleted\":false,\"isactive\":false,\"tastingid\":26}",
+      "27": "{\"shopid\":10,\"productid\":2,\"weekday\":2,\"isdeleted\":false,\"isactive\":true,\"tastingid\":27}",
+      "28": "{\"shopid\":10,\"productid\":3,\"weekday\":2,\"isdeleted\":false,\"isactive\":true,\"tastingid\":28}",
+      "29": "{\"shopid\":10,\"productid\":4,\"weekday\":2,\"isdeleted\":false,\"isactive\":false,\"tastingid\":29}",
       "-1": "{\"tastingid\":-1,\"shopid\":9,\"productid\":2,\"weekday\":1,\"isdeleted\":false,\"isactive\":true}",
       "-2": "{\"tastingid\":-2,\"shopid\":9,\"productid\":3,\"weekday\":1,\"isdeleted\":false,\"isactive\":true}",
       "-3": "{\"tastingid\":-3,\"shopid\":9,\"productid\":4,\"weekday\":1,\"isdeleted\":false,\"isactive\":false}"
+    },
+    "TastingIncrease": {
+      "1": "{\"shopid\":1,\"productid\":1,\"increment\":10.5,\"isdeleted\":false,\"isactive\":true,\"tastingincreaseid\":1}",
+      "2": "{\"shopid\":10,\"productid\":1,\"increment\":20,\"isdeleted\":false,\"isactive\":true,\"tastingincreaseid\":2}",
+      "3": "{\"shopid\":10,\"productid\":3,\"increment\":20,\"isdeleted\":false,\"isactive\":true,\"tastingincreaseid\":3}",
+      "4": "{\"shopid\":10,\"productid\":2,\"increment\":20,\"isdeleted\":false,\"isactive\":true,\"tastingincreaseid\":4}",
+      "5": "{\"shopid\":10,\"productid\":4,\"increment\":20,\"isdeleted\":false,\"isactive\":true,\"tastingincreaseid\":5}",
+      "6": "{\"shopid\":11,\"productid\":1,\"increment\":0,\"isdeleted\":false,\"isactive\":true,\"tastingincreaseid\":6}",
+      "7": "{\"shopid\":11,\"productid\":4,\"increment\":0,\"isdeleted\":false,\"isactive\":true,\"tastingincreaseid\":7}"
+    },
+    "Shelve": {
+      "1": "{\"shopid\":10,\"productid\":1,\"size\":0,\"porcentage\":0,\"isdeleted\":false,\"isactive\":true,\"shelveid\":1}",
+      "2": "{\"shopid\":10,\"productid\":2,\"size\":10,\"porcentage\":10,\"isdeleted\":false,\"isactive\":true,\"shelveid\":2}",
+      "3": "{\"shopid\":10,\"productid\":3,\"size\":0,\"porcentage\":0,\"isdeleted\":false,\"isactive\":true,\"shelveid\":3}",
+      "4": "{\"shopid\":10,\"productid\":4,\"size\":0,\"porcentage\":0,\"isdeleted\":false,\"isactive\":true,\"shelveid\":4}"
     }
   }
 }
