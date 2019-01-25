@@ -10,8 +10,8 @@
     "Tasting": 30,
     "TastingIncrease": 12,
     "Shelve": 13,
-    "Sale": 265,
-    "Transaction": 5
+    "Sale": 253,
+    "Transaction": 1
   },
   "models": {
     "Client": {
@@ -369,25 +369,8 @@
       "249": "{\"weekday\":7,\"semana\":3,\"year\":2019,\"stock\":27,\"dispatch\":0,\"monto\":13,\"productid\":6,\"userid\":3,\"shopid\":12,\"ventaid\":249}",
       "250": "{\"weekday\":7,\"semana\":4,\"year\":2019,\"stock\":10,\"dispatch\":0,\"monto\":10,\"productid\":6,\"userid\":3,\"shopid\":12,\"ventaid\":250}",
       "251": "{\"weekday\":7,\"semana\":5,\"year\":2019,\"stock\":35,\"dispatch\":0,\"monto\":17,\"productid\":6,\"userid\":3,\"shopid\":12,\"ventaid\":251}",
-      "252": "{\"weekday\":7,\"semana\":6,\"year\":2019,\"stock\":37,\"dispatch\":0,\"monto\":6,\"productid\":6,\"userid\":3,\"shopid\":12,\"ventaid\":252}",
-      "253": "{\"semana\":8,\"year\":2019,\"productid\":1,\"weekday\":7,\"monto\":44,\"stock\":10,\"dispatch\":59,\"forecast\":60,\"userid\":3,\"transactionid\":1,\"ventaid\":253}",
-      "254": "{\"semana\":8,\"year\":2019,\"productid\":2,\"weekday\":7,\"monto\":143,\"stock\":10,\"dispatch\":158,\"forecast\":158,\"userid\":3,\"transactionid\":1,\"ventaid\":254}",
-      "255": "{\"semana\":8,\"year\":2019,\"productid\":3,\"weekday\":7,\"monto\":164,\"stock\":10,\"dispatch\":179,\"forecast\":179,\"userid\":3,\"transactionid\":1,\"ventaid\":255}",
-      "256": "{\"semana\":9,\"year\":2019,\"productid\":1,\"weekday\":1,\"monto\":10,\"stock\":25,\"dispatch\":10,\"forecast\":13,\"userid\":3,\"transactionid\":2,\"ventaid\":256}",
-      "257": "{\"semana\":9,\"year\":2019,\"productid\":2,\"weekday\":1,\"monto\":55,\"stock\":25,\"dispatch\":60,\"forecast\":67,\"userid\":3,\"transactionid\":2,\"ventaid\":257}",
-      "258": "{\"semana\":9,\"year\":2019,\"productid\":3,\"weekday\":1,\"monto\":65,\"stock\":25,\"dispatch\":75,\"forecast\":81,\"userid\":3,\"transactionid\":2,\"ventaid\":258}",
-      "259": "{\"semana\":9,\"year\":2019,\"productid\":1,\"weekday\":2,\"monto\":15,\"stock\":25,\"dispatch\":0,\"forecast\":0,\"userid\":3,\"transactionid\":3,\"ventaid\":259}",
-      "260": "{\"semana\":9,\"year\":2019,\"productid\":2,\"weekday\":2,\"monto\":20,\"stock\":30,\"dispatch\":0,\"forecast\":0,\"userid\":3,\"transactionid\":3,\"ventaid\":260}",
-      "261": "{\"semana\":9,\"year\":2019,\"productid\":3,\"weekday\":2,\"monto\":25,\"stock\":35,\"dispatch\":0,\"forecast\":0,\"userid\":3,\"transactionid\":3,\"ventaid\":261}",
-      "262": "{\"semana\":9,\"year\":2019,\"productid\":1,\"weekday\":3,\"monto\":0,\"stock\":10,\"dispatch\":21,\"forecast\":21,\"userid\":3,\"transactionid\":4,\"ventaid\":262}",
-      "263": "{\"semana\":9,\"year\":2019,\"productid\":2,\"weekday\":3,\"monto\":0,\"stock\":10,\"dispatch\":73,\"forecast\":73,\"userid\":3,\"transactionid\":4,\"ventaid\":263}",
-      "264": "{\"semana\":9,\"year\":2019,\"productid\":3,\"weekday\":3,\"monto\":0,\"stock\":10,\"dispatch\":100,\"forecast\":100,\"userid\":3,\"transactionid\":4,\"ventaid\":264}"
+      "252": "{\"weekday\":7,\"semana\":6,\"year\":2019,\"stock\":37,\"dispatch\":0,\"monto\":6,\"productid\":6,\"userid\":3,\"shopid\":12,\"ventaid\":252}"
     },
-    "Transaction": {
-      "1": "{\"userid\":3,\"shopid\":12,\"created\":\"2019-01-24\",\"type\":\"sale\",\"week\":8,\"year\":2019,\"weekday\":7,\"transactiondate\":\"2019-02-24\",\"ventaactualizada\":false,\"comentario\":\"Menos pan blanco\",\"transactionid\":1}",
-      "2": "{\"userid\":3,\"shopid\":12,\"created\":\"2019-01-24\",\"type\":\"sale\",\"week\":9,\"year\":2019,\"weekday\":1,\"transactiondate\":\"2019-02-25\",\"ventaactualizada\":false,\"comentario\":\"Mucho de todo\",\"transactionid\":2}",
-      "3": "{\"userid\":3,\"shopid\":12,\"created\":\"2019-01-24\",\"type\":\"existencia\",\"week\":9,\"year\":2019,\"weekday\":2,\"transactiondate\":\"2019-02-26\",\"ventaactualizada\":false,\"comentario\":\"Pruebas\",\"transactionid\":3}",
-      "4": "{\"userid\":3,\"shopid\":12,\"created\":\"2019-01-24\",\"type\":\"sale\",\"week\":9,\"year\":2019,\"weekday\":3,\"transactiondate\":\"2019-02-27\",\"ventaactualizada\":false,\"comentario\":\"\",\"transactionid\":4}"
-    }
+    "Transaction": {}
   }
 }
