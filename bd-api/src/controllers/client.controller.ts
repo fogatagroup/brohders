@@ -4,6 +4,7 @@ import {
   Filter,
   repository,
   Where,
+  EntityNotFoundError,
 } from '@loopback/repository';
 import {
   post,
@@ -23,7 +24,7 @@ import { authenticate } from '@loopback/authentication';
 export class ClientController {
   constructor(
     @repository(ClientRepository)
-    public clientRepository: ClientRepository,
+    public clientRepository: ClientRepository
   ) { }
 
   @post('/clients', {
@@ -68,7 +69,9 @@ export class ClientController {
   async find(
     @param.query.object('filter', getFilterSchemaFor(Client)) filter?: Filter,
   ): Promise<Client[]> {
-    return await this.clientRepository.find(filter);
+    return await this.clientRepository.find({...filter, where: {
+      isdeleted: false
+    }});
   }
 
   @patch('/clients', {
@@ -134,6 +137,12 @@ export class ClientController {
     },
   })
   async deleteById( @param.path.number('id') id: number): Promise<void> {
-    await this.clientRepository.deleteById(id);
+    let client = await this.clientRepository.findById(id);
+    if(client){
+      await this.clientRepository.updateById(id,{isdeleted: true, isactive: false});
+      await this.clientRepository.shops(id).patch({isdeleted: true, isactive: false});
+    } else {
+      throw new EntityNotFoundError("Client", id || "NOT SPECIFIED");
+    }
   }
 }

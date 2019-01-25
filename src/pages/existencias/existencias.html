@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Existencias</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <div *ngIf="loading" style="text-align:center" class="center">
+    <ion-spinner name="bubbles"></ion-spinner>
+  </div>
+  <div *ngIf="!loading">
+      <ion-list>
+        <ion-item-divider color="light">General</ion-item-divider>
+        <ion-item>
+          <ion-label floating>Seleccione tienda:</ion-label>
+          <ion-select #shop (ionChange)="selectShop()" [(ngModel)]="selectedShop" >
+            <ion-option  *ngFor="let shop of shops" [value]="shop">{{shop.name}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Fecha:</ion-label>
+            <ion-datetime #date></ion-datetime>
+        </ion-item>
+        <div *ngIf="selectedShop&&shelveList.length" >
+          <ion-item-divider color="light">Existencias</ion-item-divider>
+          <form [formGroup]="productForm" style="padding-bottom: 15px">
+              <ion-item *ngFor="let s of shelveList" style="border-bottom: none">
+                  <ion-icon name="pricetag" item-start></ion-icon>
+                  <ion-label>{{convertIdToName(s.productid)}}</ion-label>
+                  <ion-input [disabled]="calculado" [formControlName]="s.productid" type="text"></ion-input>
+              </ion-item>
+          </form>  
+          <ion-item>
+            <ion-label stacked>Comentario revisión existencia</ion-label>
+            <ion-input #comentario></ion-input>
+          </ion-item>
+            <button ion-button type='button' [disabled]="!comentario.value||!productForm.valid||!shop.value||!date.value.day" (click)="saveSale(date.value,comentario.value)">Ingresar</button>
+            <button ion-button color="danger" type='button' (click)="refresh()">Cancelar</button>
+        </div>
+      </ion-list>
+  </div>
+
+</ion-content>

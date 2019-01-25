@@ -17,6 +17,7 @@ import { AlertController } from 'ionic-angular/components/alert/alert-controller
 import { ClientsPage } from '../pages/clients/clients';
 import { UsersPage } from '../pages/users/users';
 import { DevicesPage } from '../pages/devices/devices';
+import { ExistenciasPage } from '../pages/existencias/existencias';
 
 @Component({
   templateUrl: 'app.html'
@@ -36,6 +37,7 @@ export class MyApp {
       { title: 'Inicio', component: HomePage, icon:'home' },
       { title: 'Usuarios', component: UsersPage, icon: 'people'},
       { title: 'Pronóstico', component: PronosticoPage, icon: 'analytics'},
+      { title: 'Existencias', component: ExistenciasPage, icon: 'clipboard'},
     /*   { title: 'Degustaciones', component: TastingsPage, icon:'pizza'},
       { title: 'Ventas', component: HomePage, icon:'cash'}, */
       { title: 'Clientes', component: ClientsPage, icon: 'basket'},

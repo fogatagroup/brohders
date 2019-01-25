@@ -39,6 +39,6 @@ export var final_result=(value:number, lir:number,lsr:number)=>{
     if(value>=lir&&value<=lsr){
         return value;
     }else{
-        return 0;
+        return null;
     }
 }

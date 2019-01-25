@@ -8,3 +8,5 @@ export * from './user-shop.repository';
 export * from './tasting.repository';
 export * from './tasting-increase.repository';
 export * from './shelve.repository';
+export * from './sale.repository';
+export * from './transaction.repository';

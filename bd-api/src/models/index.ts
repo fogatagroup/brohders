@@ -9,3 +9,5 @@ export * from './user-shop.model';
 export * from './tasting.model';
 export * from './tasting-increase.model';
 export * from './shelve.model';
+export * from './sale.model';
+export * from './transaction.model';

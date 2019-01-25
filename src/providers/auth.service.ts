@@ -46,6 +46,17 @@ export class AuthService {
         })
     }
 
+    getLoggerUser(): User | null {
+        let user = sessionStorage.getItem("brohders-user");
+        let loggedUser = null;
+        try {
+            loggedUser = JSON.parse(user) as LoggedUser;
+        } catch(err){
+            return null;
+        }
+        return loggedUser.user || loggedUser;
+    }
+
     logout(): Promise<any> {
         return new Promise(res => {
             sessionStorage.setItem("brohders-user", "");

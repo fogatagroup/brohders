@@ -26,6 +26,8 @@ export class ClientShopsController {
     @param.path.number('id') clientId: typeof Client.prototype.clientid,
     @param.query.object('filter', getFilterSchemaFor(Shop)) filter?: Filter<Shop>
     ): Promise<Shop[]> {
-    return await this.clientRepository.shops(clientId).find(filter);
+    return await this.clientRepository.shops(clientId).find({...filter, where: {
+      isdeleted: false
+    }});
   }
 }

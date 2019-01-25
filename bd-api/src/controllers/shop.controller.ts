@@ -66,7 +66,9 @@ export class ShopController {
   async find(
     @param.query.object('filter', getFilterSchemaFor(Shop)) filter?: Filter,
   ): Promise<Shop[]> {
-    return await this.shopRepository.find(filter);
+    return await this.shopRepository.find({...filter, where: {
+      isdeleted: false
+    }});
   }
 
   @patch('/shops', {
@@ -78,7 +80,7 @@ export class ShopController {
     },
   })
   async updateAll(
-    @requestBody() shop: Shop,
+    @requestBody() shop: Partial<Shop>,
     @param.query.object('where', getWhereSchemaFor(Shop)) where?: Where,
   ): Promise<Count> {
     return await this.shopRepository.updateAll(shop, where);

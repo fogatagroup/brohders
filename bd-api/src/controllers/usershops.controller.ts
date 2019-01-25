@@ -32,10 +32,11 @@ export class UserShopsController {
     ): Promise<Shop[]> {
     let userShops = await this.userRepository.userShops(userId).find(filter);
     return await this.shopRepository.find({
-      where: {
+      where: {  
         shopid: {
           inq: userShops.map(u => u.shopid)
-        }
+        },
+        isdeleted: false
       }
     })
   }

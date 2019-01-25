@@ -23,6 +23,7 @@ import { ComponentsModule } from '../components/components.module';
 import { PipesModule } from '../pipes/pipes.module';
 import { UsersPage } from '../pages/users/users';
 import { DevicesPage } from '../pages/devices/devices';
+import { ExistenciasPage } from '../pages/existencias/existencias';
 
 @NgModule({
   declarations: [
@@ -36,14 +37,20 @@ import { DevicesPage } from '../pages/devices/devices';
     PronosticoPage,
     LoginFlatPage,
     UsersPage,
-    DevicesPage
+    DevicesPage,
+    ExistenciasPage
   ],
   imports: [
     HttpModule,
     BrowserModule,
     ComponentsModule,
     PipesModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      monthNames: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'],
+      monthShortNames: ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sept', 'oct', 'nov', 'dic'],
+      dayNames: ['domingo', 'lunes', 'martes', 'mi\u00e9rcoles', 'jueves', 'viernes', 's\u00e1bado'],
+      dayShortNames: ['dom', 'lun', 'mar', 'mi\u00e9', 'jue', 'vie', 's\u00e1b']
+    }),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -57,7 +64,8 @@ import { DevicesPage } from '../pages/devices/devices';
     ClientsPage,
     LoginFlatPage,
     UsersPage,
-    DevicesPage
+    DevicesPage,
+    ExistenciasPage
   ],
   providers: [
     Uid,

@@ -6,3 +6,5 @@ export * from './shop.controller';
 export * from './clientshops.controller';
 export * from './product.controller';
 export * from './device.controller';
+export * from './sale.controller';
+export * from './transaction.controller';

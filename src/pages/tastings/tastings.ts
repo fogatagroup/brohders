@@ -246,7 +246,7 @@ export class TastingsPage implements OnInit {
       if(a.tastingincreaseid <= 0){
         let newTasting = {
           productid: a.productid,
-          increment: a.increment
+          increment: Number(a.increment) || 0
         } as Tasting_Increase
         this.http.post(`shops/${this.selectedItem.shopid}/tasting-increases`, newTasting).subscribe(res=>{
           console.log("SAVED INCREMENT", res.json().tastingincreaseid);
