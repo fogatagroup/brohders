@@ -16,24 +16,24 @@ import {
   del,
   requestBody,
 } from '@loopback/rest';
-import {Transaction} from '../models';
-import {TransactionRepository} from '../repositories';
+import { Transaction } from '../models';
+import { TransactionRepository } from '../repositories';
 
 export class TransactionController {
   constructor(
     @repository(TransactionRepository)
-    public transactionRepository : TransactionRepository,
-  ) {}
+    public transactionRepository: TransactionRepository,
+  ) { }
 
   @post('/transactions', {
     responses: {
       '200': {
         description: 'Transaction model instance',
-        content: {'application/json': {schema: {'x-ts-type': Transaction}}},
+        content: { 'application/json': { schema: { 'x-ts-type': Transaction } } },
       },
     },
   })
-  async create(@requestBody() transaction: Transaction): Promise<Transaction> {
+  async create( @requestBody() transaction: Transaction): Promise<Transaction> {
     return await this.transactionRepository.create(transaction);
   }
 
@@ -41,7 +41,7 @@ export class TransactionController {
     responses: {
       '200': {
         description: 'Transaction model count',
-        content: {'application/json': {schema: CountSchema}},
+        content: { 'application/json': { schema: CountSchema } },
       },
     },
   })
@@ -57,7 +57,7 @@ export class TransactionController {
         description: 'Array of Transaction model instances',
         content: {
           'application/json': {
-            schema: {type: 'array', items: {'x-ts-type': Transaction}},
+            schema: { type: 'array', items: { 'x-ts-type': Transaction } },
           },
         },
       },
@@ -73,7 +73,7 @@ export class TransactionController {
     responses: {
       '200': {
         description: 'Transaction PATCH success count',
-        content: {'application/json': {schema: CountSchema}},
+        content: { 'application/json': { schema: CountSchema } },
       },
     },
   })
@@ -88,11 +88,11 @@ export class TransactionController {
     responses: {
       '200': {
         description: 'Transaction model instance',
-        content: {'application/json': {schema: {'x-ts-type': Transaction}}},
+        content: { 'application/json': { schema: { 'x-ts-type': Transaction } } },
       },
     },
   })
-  async findById(@param.path.number('id') id: number): Promise<Transaction> {
+  async findById( @param.path.number('id') id: number): Promise<Transaction> {
     return await this.transactionRepository.findById(id);
   }
 
@@ -131,7 +131,7 @@ export class TransactionController {
       },
     },
   })
-  async deleteById(@param.path.number('id') id: number): Promise<void> {
+  async deleteById( @param.path.number('id') id: number): Promise<void> {
     await this.transactionRepository.deleteById(id);
   }
 }

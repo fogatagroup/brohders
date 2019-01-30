@@ -1,4 +1,5 @@
-import { Entity, model, property } from '@loopback/repository';
+import { Entity, model, property, hasMany } from '@loopback/repository';
+import { Sale } from './index';
 
 @model()
 export class Transaction extends Entity {
@@ -68,6 +69,11 @@ export class Transaction extends Entity {
     required: false
   })
   comentario: string;
+
+  @hasMany(() => Sale, {
+    keyTo: 'transactionid'
+  })
+  sales?: Sale[]
 
   constructor(data?: Partial<Transaction>) {
     super(data);

@@ -5,6 +5,7 @@ export class Sale {
     weekday: number;
     monto: number;
     stock: number;
+    forecast?: number;
     dispatch: number;
     userid: number;
     shopid?: number;

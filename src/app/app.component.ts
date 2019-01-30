@@ -18,6 +18,8 @@ import { ClientsPage } from '../pages/clients/clients';
 import { UsersPage } from '../pages/users/users';
 import { DevicesPage } from '../pages/devices/devices';
 import { ExistenciasPage } from '../pages/existencias/existencias';
+import { ComparativoSemanalPage } from '../pages/comparativo-semanal/comparativo-semanal';
+import { TransaccionesUsuarioPage } from '../pages/transacciones-usuario/transacciones-usuario';
 
 @Component({
   templateUrl: 'app.html'
@@ -42,7 +44,9 @@ export class MyApp {
       { title: 'Ventas', component: HomePage, icon:'cash'}, */
       { title: 'Clientes', component: ClientsPage, icon: 'basket'},
       { title: 'Productos', component: ProductsPage, icon: 'pricetags'},
-      { title: 'Dispositivos', component: DevicesPage, icon: "phone-portrait"}
+      { title: 'Dispositivos', component: DevicesPage, icon: "phone-portrait"},
+      { title: 'Comparativo Semanal', component: ComparativoSemanalPage, icon: "checkbox-outline"},
+      { title: 'Transacciones Usuario', component: TransaccionesUsuarioPage, icon: "contacts"}
     ];
 
   }
@@ -62,6 +66,7 @@ export class MyApp {
   }
 
   openPage(page) {
+    console.log(page.component.name);
     if(this.auth.isAuthorized(page.component.name)){
       this.nav.setRoot(page.component);
     } else {

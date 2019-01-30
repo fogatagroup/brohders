@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -12,7 +12,7 @@
   </div>
   <div *ngIf="!loading">
       <div padding>
-        <ion-segment [(ngModel)]="shop">
+        <ion-segment [(ngModel)]="shop" color="primary">
           <ion-segment-button value="general">
             General
           </ion-segment-button>

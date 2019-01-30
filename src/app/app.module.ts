@@ -24,6 +24,9 @@ import { PipesModule } from '../pipes/pipes.module';
 import { UsersPage } from '../pages/users/users';
 import { DevicesPage } from '../pages/devices/devices';
 import { ExistenciasPage } from '../pages/existencias/existencias';
+import { ComparativoSemanalPage } from '../pages/comparativo-semanal/comparativo-semanal';
+import { ExcelService } from '../providers/excel.service';
+import { TransaccionesUsuarioPage } from '../pages/transacciones-usuario/transacciones-usuario';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,9 @@ import { ExistenciasPage } from '../pages/existencias/existencias';
     LoginFlatPage,
     UsersPage,
     DevicesPage,
-    ExistenciasPage
+    ExistenciasPage,
+    ComparativoSemanalPage,
+    TransaccionesUsuarioPage
   ],
   imports: [
     HttpModule,
@@ -65,7 +70,9 @@ import { ExistenciasPage } from '../pages/existencias/existencias';
     LoginFlatPage,
     UsersPage,
     DevicesPage,
-    ExistenciasPage
+    ExistenciasPage,
+    ComparativoSemanalPage,
+    TransaccionesUsuarioPage
   ],
   providers: [
     Uid,
@@ -74,6 +81,7 @@ import { ExistenciasPage } from '../pages/existencias/existencias';
     SplashScreen,
     HttpService,
     AuthService,
+    ExcelService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

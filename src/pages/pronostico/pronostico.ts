@@ -333,6 +333,7 @@ export class PronosticoPage implements OnInit{
           semana: this.diaCalculado.month() == 11 && this.diaCalculado.week() == 1 && !this.diaCalculado.day() ? 52 : this.diaCalculado.week() - (!this.diaCalculado.day() ? 1 : 0),
           year: this.diaCalculado.month() == 11 /*DICIEMBRE */ && this.diaCalculado.week() == 1 && this.diaCalculado.day() ?  this.diaCalculado.year() + 1 : this.diaCalculado.year(), 
           productid: p.productid,
+          shopid: this.selectedShop.shopid,
           userid: this.user.userid,
           weekday: !diaSemanaActual ? 7 : diaSemanaActual} as Sale
       })

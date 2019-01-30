@@ -1,0 +1,58 @@
+
+<ion-header>
+
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Comparativo semanal</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+        <ion-label floating>Semana del: </ion-label>
+        <ion-select (ionChange)="onChangeWeek()" [(ngModel)]="selectedWeek">
+          <ion-option *ngFor="let w of weeks" [value]="w">{{w.start.format('DD/MM/YYYY')}} - {{w.end.format('DD/MM/YYYY')}}</ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-grid *ngIf="userSales.length">
+          <ion-row>
+            <ion-col>
+              <b color="primary">Usuario</b>
+            </ion-col>
+            <ion-col>
+              <b color="primary">Pronóstico total</b>
+            </ion-col>
+            <ion-col>
+              <b color="primary">Entregas totales</b>
+            </ion-col>
+            <ion-col color="primary">
+              <b >Diferencia</b>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngFor="let u of userSales">
+              <ion-col>
+                {{u.username}}
+              </ion-col>
+              <ion-col>
+                {{u.forecast}}
+              </ion-col>
+              <ion-col>
+                {{u.sale}}
+              </ion-col>
+              <ion-col>
+                {{(u.sale/u.forecast)*100 - 100 | number : '1.2-2'}}%
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-12>
+                  <button ion-button color="primary" (click)="export()">Exportar</button>
+              </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-item>
+  </ion-list>
+</ion-content>
