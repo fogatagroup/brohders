@@ -37,10 +37,10 @@
             <form #generalForm="ngForm" (ngSubmit)="onSaveGeneral()" *ngIf="selectedItem">
               <ion-list> 
                 <ion-item>
-                    <ion-input [(ngModel)]="selectedItemEdit.name" name="name" placeholder="Nombre" required></ion-input>
+                    <ion-input [(ngModel)]="selectedItemEdit.name" name="name" placeholder="Código" required></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-input [(ngModel)]="selectedItemEdit.description" name="description" placeholder="Descripcion" required></ion-input>
+                    <ion-input [(ngModel)]="selectedItemEdit.description" name="description" placeholder="Nombre" required></ion-input>
                 </ion-item>
               </ion-list>
               <button ion-button full type="submit" [disabled]="!generalForm.form.valid">Guardar</button>

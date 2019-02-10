@@ -1,0 +1,10 @@
+{
+  "name": "postgres",
+  "connector": "postgresql",
+  "url": "postgres://postgres:rootio@localhost/brohders",
+  "host": "localhost",
+  "port": 5432,
+  "user": "postgres",
+  "password": "rootio",
+  "database": "brohders"
+}

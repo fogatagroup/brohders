@@ -17,13 +17,27 @@
 
 
 <ion-content padding>
-  <ion-list>
-    <ion-item>
-      <ion-label floating>Usuario</ion-label>
-      <ion-select [(ngModel)]="selectedUser">
-        <ion-option *ngFor="let u of users" [value]="u">{{u.username}}</ion-option>
-      </ion-select>
-    </ion-item>
+<ion-list>
+  <ion-grid>
+        <ion-row>
+          <ion-col col-12 col-md-6>
+              <ion-item>
+                  <ion-label floating>Usuario</ion-label>
+                  <ion-select [(ngModel)]="selectedUser">
+                    <ion-option *ngFor="let u of users" [value]="u">{{u.username}}</ion-option>
+                  </ion-select>
+              </ion-item>
+          </ion-col>
+          <ion-col col-12 col-md-6>
+            <ion-item>
+                <ion-label floating>Tienda (opcional)</ion-label>
+                <ion-select [(ngModel)]="selectedShop">
+                  <ion-option *ngFor="let s of shops" [value]="s">{{s.name}}</ion-option>
+                </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     <ion-item>
       <ion-label>Cantidad transacciones</ion-label>
       <ion-input [(ngModel)]="hasta"></ion-input>
@@ -33,54 +47,60 @@
     <ion-item>
         <ion-grid *ngIf="userTransactions.length">
           <ion-row>
-            <ion-col>
+            <ion-col col-1>
               <b color="primary">Semana</b>
             </ion-col>
-            <ion-col>
+            <ion-col col-2>
               <b color="primary">Tienda</b>
             </ion-col>
-            <ion-col>
+            <ion-col col-2>
               <b color="primary">Producto</b>
             </ion-col>
-            <ion-col>
+            <ion-col col-2>
               <b color="primary">Día</b>
             </ion-col>
-            <ion-col>
+            <ion-col col-1>
               <b color="primary">Existencia</b>
             </ion-col>
-            <ion-col>
+            <ion-col col-1>
               <b color="primary">Entrega</b>
             </ion-col>
-            <ion-col>
+            <ion-col col-1>
               <b color="primary">Pronóstico</b>
             </ion-col>
-            <ion-col>
+            <ion-col col-1>
+              <b color="primary">Venta</b>
+            </ion-col>
+            <ion-col col-1>
               <b color="primary">Año</b>
             </ion-col>
           </ion-row>
           <ion-row *ngFor="let u of userTransactions">
-              <ion-col>
+              <ion-col col-1> 
                 {{u.semana}}
               </ion-col>
-              <ion-col>
+              <ion-col col-2>
                 {{u.tienda}}
               </ion-col>
-              <ion-col>
+              <ion-col col-2>
                 {{u.producto}}
               </ion-col>
-              <ion-col>
+              <ion-col col-2>
                 {{u.diaSemana}}
               </ion-col>
-              <ion-col>
+              <ion-col col-1>
                 {{u.existencia}}
               </ion-col>
-              <ion-col>
+              <ion-col col-1>
                 {{u.entrega}}
               </ion-col>
-              <ion-col>
+              <ion-col col-1>
                 {{u.pronostico}}
               </ion-col>
-              <ion-col>
+              <ion-col col-1>
+                {{u.venta}}
+              </ion-col>
+              <ion-col col-1>
                 {{u.anio}}
               </ion-col>
             </ion-row>

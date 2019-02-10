@@ -1,0 +1,60 @@
+{
+  "ids": {
+    "Client": 3,
+    "User": 9,
+    "Role": 5,
+    "Shop": 6,
+    "Product": 7,
+    "UserShop": 1,
+    "Device": 1,
+    "Tasting": 1,
+    "TastingIncrease": 1,
+    "Shelve": 1,
+    "Sale": 1,
+    "Transaction": 1
+  },
+  "models": {
+    "Client": {
+      "1": "{\"name\":\"Pricesmart\",\"isdeleted\":false,\"isactive\":true,\"description\":\"\",\"clientid\":1}",
+      "2": "{\"name\":\"Walmart\",\"isdeleted\":false,\"isactive\":true,\"clientid\":2}"
+    },
+    "User": {
+      "1": "{\"username\":\"dev\",\"password_hash\":\"827ccb0eea8a706c4c34a16891f84e7b\",\"name\":\"Bryan\",\"lastname\":\"Cruz\",\"userid\":1,\"roleid\":1}",
+      "2": "{\"username\":\"luis.orozco\",\"password_hash\":\"827ccb0eea8a706c4c34a16891f84e7b\",\"name\":\"Luis Amilcar\",\"lastname\":\"Orozco Pérez\",\"userid\":2,\"roleid\":4}",
+      "3": "{\"username\":\"dennis.ortiz\",\"password_hash\":\"827ccb0eea8a706c4c34a16891f84e7b\",\"name\":\"Dennis Estuardo\",\"lastname\":\"Ortiz Angel\",\"userid\":3,\"roleid\":4}",
+      "4": "{\"username\":\"william.sanchez\",\"password_hash\":\"827ccb0eea8a706c4c34a16891f84e7b\",\"name\":\"William Estuardo\",\"lastname\":\"Sanchez Martinez\",\"userid\":4,\"roleid\":4}",
+      "5": "{\"username\":\"edgar.colindres\",\"password_hash\":\"827ccb0eea8a706c4c34a16891f84e7b\",\"name\":\"Edgar Alexander\",\"lastname\":\"Colindres Chávez\",\"userid\":5,\"roleid\":4}",
+      "6": "{\"username\":\"miguel.raymundo\",\"password_hash\":\"827ccb0eea8a706c4c34a16891f84e7b\",\"name\":\"Miguel Isaías\",\"lastname\":\"Raymundo Ávila\",\"userid\":6,\"roleid\":4}",
+      "7": "{\"username\":\"juan.guzman\",\"password_hash\":\"827ccb0eea8a706c4c34a16891f84e7b\",\"name\":\"Juan Alberto\",\"lastname\":\"Guzmán Morán\",\"userid\":7,\"roleid\":4}",
+      "8": "{\"username\":\"billy.harders\",\"password_hash\":\"827ccb0eea8a706c4c34a16891f84e7b\",\"name\":\"Juan Guillermo\",\"lastname\":\"Harders\",\"userid\":8,\"roleid\":1}"
+    },
+    "Role": {
+      "1": "{\"roleid\":1,\"name\":\"Super Admin\",\"pages\":[\"home\",\"clients\",\"login-flat-page\",\"products\",\"shops\",\"tastings\",\"users\",\"devices\",\"pronostico\",\"existencias\",\"comparativosemanal\",\"transaccionesusuario\"],\"isdeleted\":false,\"isactive\":true}",
+      "2": "{\"roleid\":2,\"name\":\"Admin\",\"pages\":[\"home\",\"login-flat-page\",\"products\",\"pronostico\",\"existencias\",\"comparativosemanal\",\"transaccionesusuario\"],\"isdeleted\":false,\"isactive\":true}",
+      "3": "{\"roleid\":3,\"name\":\"Supervisor\",\"pages\":[\"home\",\"login-flat-page\",\"products\",\"pronostico\",\"existencias\",\"comparativosemanal\"],\"isdeleted\":false,\"isactive\":true}",
+      "4": "{\"roleid\":4,\"name\":\"Vendedor\",\"pages\":[\"home\",\"login-flat-page\",\"pronostico\",\"existencias\"],\"isdeleted\":false,\"isactive\":true}"
+    },
+    "Shop": {
+      "1": "{\"name\":\"PSMT z11\",\"clientid\":1,\"isdeleted\":false,\"isactive\":true,\"description\":\"Pricesmart Zona 11\",\"shopid\":1}",
+      "2": "{\"name\":\"PSMT z10\",\"clientid\":1,\"isdeleted\":false,\"isactive\":true,\"description\":\"Pricesmart Zona 10\",\"shopid\":2}",
+      "3": "{\"name\":\"PSMT Fraijanes\",\"clientid\":1,\"isdeleted\":false,\"isactive\":true,\"description\":\"Pricesmart Fraijanes\",\"shopid\":3}",
+      "4": "{\"name\":\"WM Condado\",\"clientid\":2,\"isdeleted\":false,\"isactive\":true,\"description\":\"Walmart Condado Concepción\",\"shopid\":4}",
+      "5": "{\"name\":\"WM Roosvelt\",\"clientid\":2,\"isdeleted\":false,\"isactive\":true,\"description\":\"Walmart Roosvelt\",\"shopid\":5}"
+    },
+    "Product": {
+      "1": "{\"productid\":1,\"name\":\"BL\",\"description\":\"Blanco\",\"isdeleted\":false,\"isactive\":true}",
+      "2": "{\"name\":\"C/S\",\"description\":\"Semillas\",\"isdeleted\":false,\"isactive\":true,\"productid\":2}",
+      "3": "{\"name\":\"AV\",\"description\":\"Avena\",\"isdeleted\":false,\"isactive\":true,\"productid\":3}",
+      "4": "{\"productid\":4,\"name\":\"HMB\",\"description\":\"Hamburguesa\",\"isdeleted\":false,\"isactive\":true}",
+      "5": "{\"name\":\"HD\",\"description\":\"HOT-DOG\",\"isdeleted\":false,\"isactive\":true,\"productid\":5}",
+      "6": "{\"name\":\"DR\",\"description\":\"Dinner Rolls\",\"isdeleted\":false,\"isactive\":true,\"productid\":6}"
+    },
+    "UserShop": {},
+    "Device": {},
+    "Tasting": {},
+    "TastingIncrease": {},
+    "Shelve": {},
+    "Sale": {},
+    "Transaction": {}
+  }
+}

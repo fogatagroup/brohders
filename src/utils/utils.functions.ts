@@ -1,6 +1,14 @@
+import {quantile} from 'simple-statistics'
+
 
 export var quartil=(array:number[],value:number)=>{
     //console.log("array",array)
+    if(array.length){
+        return quantile(array, value * 0.25);
+    } else {
+        return NaN;
+    }
+    /*
     var new_array=array.sort((t1,t2)=>t1-t2);
     var drop1=new_array.splice(0,1)[0];
     var drop2=new_array.splice(new_array.length-1,1)[0];
@@ -13,7 +21,7 @@ export var quartil=(array:number[],value:number)=>{
         return new_array[ent-1];
     }else{
         return new_array[ent-1]+diff*(new_array[ent]-new_array[ent-1])
-    }
+    }*/
 }
 
 export var average=(array:number[])=>{

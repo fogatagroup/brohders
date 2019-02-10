@@ -115,7 +115,7 @@ export class PronosticoPage implements OnInit{
     console.log(this.stockList);
     let weeks = [];
     let weeksToConsider = 6;
-    let bufferWeeks = 2;
+    let bufferWeeks = 1;
     this.diaCalculado = moment(value1.year+'-'+value1.month+'-'+value1.day, 'YYYY-MM-DD'); 
     let firstWeekDate = this.diaCalculado.clone().subtract(weeksToConsider + (bufferWeeks + (!this.diaCalculado.day() ? 1 : 0)), 'week').endOf('week');
     do {
@@ -135,8 +135,8 @@ export class PronosticoPage implements OnInit{
         })
       }
     };
-    let salesFilter = JSON.stringify(filter);
-    this.http.get(`shops/${this.selectedShop.shopid}/sales?filter=${salesFilter}`).subscribe(res => {
+    let salesQuery = JSON.stringify(filter);
+    this.http.get(`shops/${this.selectedShop.shopid}/sales?filter=${salesQuery}`).subscribe(res => {
       this.sales = res.json() as Sale[];
       this.loading=true;
       ///LOS DE LA FECHAAAAA=======================================================
@@ -146,16 +146,17 @@ export class PronosticoPage implements OnInit{
       console.log("--------------------------DIA para " + day);
       this.shelveList.forEach(p=>{
         var salesFilter=this.sales.filter(t=>t.productid==p.productid&&day==t.weekday);
-        
+        console.log("VENTAS:", this.sales);
+        console.log("VENTAS FILTRADAS:", salesFilter);
         console.log("--------------------------PROD: para " + p.productid);
-        var values=[];
-        salesFilter.forEach(t=>values.push(t.monto));
+        let values: number[] = [];
+        values= salesFilter.map(s => s.monto);
+        console.log('CONSIDERADOS PARA DIA para ' + day + " Y PROD " + p.productid, values);
         var cuartil1=Math.round(quartil(values,1));
         var mediana=Math.round(quartil(values,2));
         var cuartil3=Math.round(quartil(values,3));
         var lirvalue= Math.round(lir(cuartil1,mediana));
         var lsrvalue=Math.round(lsr(mediana,cuartil3));
-        console.log('CONSIDERADOS PARA DIA para ' + day + " Y PROD " + p.productid, values);
         console.log("DATOS PARA para " + day + " Y PROD " + p.productid, cuartil1,mediana,cuartil3,lirvalue,lsrvalue)
         //para cada venta de ese producto en ese dia para cada semana
         var suma=0;
@@ -326,7 +327,7 @@ export class PronosticoPage implements OnInit{
         let existencia = this.productForm.value[Object.keys(this.productForm.value).find(k => Number(k) == p.productid)];
         let venta = this.ventaForm.value[Object.keys(this.ventaForm.value).find(k => Number(k) == p.productid)];
         return {
-          forecast: p.value, 
+          forecast: !isNaN(p.value) ? p.value : Number(venta), 
           monto: 0, 
           stock: Number(existencia), 
           dispatch: Number(venta), 

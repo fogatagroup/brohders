@@ -20,30 +20,30 @@
     <ion-item>
         <ion-grid *ngIf="userSales.length">
           <ion-row>
-            <ion-col>
+            <ion-col col-3>
               <b color="primary">Usuario</b>
             </ion-col>
-            <ion-col>
+            <ion-col col-3>
               <b color="primary">Pronóstico total</b>
             </ion-col>
-            <ion-col>
+            <ion-col col-3>
               <b color="primary">Entregas totales</b>
             </ion-col>
-            <ion-col color="primary">
+            <ion-col col-3 color="primary">
               <b >Diferencia</b>
             </ion-col>
           </ion-row>
           <ion-row *ngFor="let u of userSales">
-              <ion-col>
+              <ion-col col-3>
                 {{u.username}}
               </ion-col>
-              <ion-col>
+              <ion-col col-3>
                 {{u.forecast}}
               </ion-col>
-              <ion-col>
+              <ion-col col-3>
                 {{u.sale}}
               </ion-col>
-              <ion-col>
+              <ion-col col-3>
                 {{(u.sale/u.forecast)*100 - 100 | number : '1.2-2'}}%
               </ion-col>
             </ion-row>

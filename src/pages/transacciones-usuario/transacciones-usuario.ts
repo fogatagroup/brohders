@@ -25,6 +25,7 @@ class UserTransaction {
   existencia: number;
   entrega: number;
   pronostico: number;
+  venta: number;
   anio: number;
 }
 
@@ -41,6 +42,7 @@ export class TransaccionesUsuarioPage {
   selectedUser: User;
   userTransactions: UserTransaction[] = [];
   hasta: number = 100;
+  selectedShop: Shop;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: HttpService, private loading: LoadingController, private excel: ExcelService) {
     this.getData();
@@ -63,8 +65,11 @@ export class TransaccionesUsuarioPage {
         where: {
           userid: this.selectedUser.userid
         },
-        order: ['year DESC', 'semana DESC'],
+        order: ['year DESC', 'semana DESC', 'weekday DESC', 'shopid DESC', 'productid DESC'],
         limit: this.hasta
+      }
+      if(this.selectedShop){
+        filter.where['shopid'] = this.selectedShop.shopid;
       }
       this.http.get(`sales?filter=${JSON.stringify(filter)}`).subscribe(res => {
         this.sales = res.json() as Sale[];
@@ -82,7 +87,8 @@ export class TransaccionesUsuarioPage {
             diaSemana: weekday.day,
             existencia: s.stock,
             entrega: s.dispatch,
-            pronostico: s.forecast,
+            pronostico: Math.round(Number(s.forecast) * 100)/100,
+            venta: s.monto,
             anio: s.year
           })
         })

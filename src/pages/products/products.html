@@ -18,7 +18,7 @@
   <div *ngIf="!loading">
     <ion-list *ngIf="!selectedProduct">
         <ion-item *ngFor="let product of productsList; let i=index">
-          {{i+1}}.&nbsp;{{product.name}}
+          {{product.productid}}.&nbsp;{{product.name}} - {{product.description}}
           <diV style="float:right">
             <button  ion-button icon-end color="secondary" (click)="select(product)" round>Editar</button>
             <button  ion-button icon-end color="danger" (click)="delete(product.productid)" round>Eliminar</button>    
@@ -33,17 +33,21 @@
             Crear Producto 
           </ion-item-divider>
       <ion-item>
-        <ion-label>Nombre</ion-label>
+        <ion-label>Código</ion-label>
         <ion-input type="text" required #name="ngModel" [(ngModel)]="selectedProduct.name" name="name"></ion-input>
       </ion-item>
       <div [hidden]="name.valid || name.pristine"
           class="alert alert-danger">
-          Nombre es requerido
+          Código es requerido
       </div>
       <ion-item>
-        <ion-label>Descripción</ion-label>
-        <ion-textarea type="text" #description="ngModel" [(ngModel)]="selectedProduct.description" name="description"></ion-textarea>
+        <ion-label>Nombre</ion-label>
+        <ion-textarea type="text" required #description="ngModel" [(ngModel)]="selectedProduct.description" name="description"></ion-textarea>
       </ion-item>
+      <div [hidden]="description.valid || description.pristine"
+          class="alert alert-danger">
+          Nombre es requerido
+      </div>
       <button ion-button [disabled]="!productoForm.form.valid" type="submit" block>Guardar</button>
       <button ion-button color="danger" type="button" (click)="cancelForm()" block>Cancelar</button>
     </form>
