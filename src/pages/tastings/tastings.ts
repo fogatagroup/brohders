@@ -306,6 +306,7 @@ export class TastingsPage implements OnInit {
   onSaveGeneral(){
     this.showLoading();
     this.http.put("shops",this.selectedItemEdit.shopid, {
+      ...this.selectedItem,
       name: this.selectedItemEdit.name,
       description: this.selectedItemEdit.description
     }).subscribe(res => {
