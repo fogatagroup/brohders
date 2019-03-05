@@ -1,4 +1,4 @@
-export var serverUrl='http://localhost:3002';
+export var serverUrl='http://45.79.7.222:3002';
 
 
 export var weekdays=[
@@ -31,4 +31,4 @@ export var weekdays=[
         'value': 7,
     }]
 
-export const inforceDevice = false;
+export const inforceDevice = true;

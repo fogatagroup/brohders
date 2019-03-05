@@ -8,6 +8,7 @@ import { HomePage } from '../home/home';
 import { inforceDevice } from '../../config/config';
 import { Uid } from '@ionic-native/uid';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 
 @IonicPage()
 @Component({
@@ -28,7 +29,7 @@ export class LoginFlatPage {
     public isUsernameValid: boolean;
     public isPasswordValid: boolean;
     
-    constructor(public navCtrl: NavController, public navParams: NavParams, public service: LoginService, private toastCtrl: ToastService, private auth: AuthService,private uid: Uid, private androidPermissions: AndroidPermissions, private plt: Platform) { 
+    constructor(public navCtrl: NavController, public navParams: NavParams, public service: LoginService, private toastCtrl: ToastService, private auth: AuthService,private uid: Uid, private androidPermissions: AndroidPermissions, private plt: Platform, private alert: AlertController) { 
         this.isUsernameValid= true;
         this.isPasswordValid = true;
         this.data = this.service.getDataForLoginFlat();
@@ -37,7 +38,7 @@ export class LoginFlatPage {
         }
     }
 
-    onEvent = (event: string): void => {
+    onEvent = async (event: string) => {
         if (event == "onLogin" && !this.validate()) {
             return ;
         }
@@ -47,8 +48,26 @@ export class LoginFlatPage {
                 'pass': this.password,
                 'imei': null
             }; 
-            if(inforceDevice && this.plt.is('mobile')){
-                loginData.imei = this.getImei();
+            if(inforceDevice && this.plt.is('mobileweb')){
+                let notAllowed = this.alert.create({
+                    title: "Denegado",
+                    message: "Se ha denegado el acceso ya que no se permite el acceso a través de explorador"
+                })
+                notAllowed.present();
+                return;
+            } else if (inforceDevice && this.plt.is('mobile')){
+                let response = await this.getImei();
+                if(response.imei){
+                    console.log(response.imei);
+                    loginData.imei = response.imei;
+                } else {
+                    let alert = this.alert.create({
+                        title: "Éxito",
+                        message: response.msg
+                    });
+                    alert.present();
+                    return;
+                }
             } else {
                 console.log("SKIPPING IMEI VALIDATION");
             }
@@ -79,24 +98,26 @@ export class LoginFlatPage {
         return this.isPasswordValid && this.isUsernameValid;
     }
 
-    async getImei() {
-        const { hasPermission } = await this.androidPermissions.checkPermission(
-          this.androidPermissions.PERMISSION.READ_PHONE_STATE
-        );
-       
-        if (!hasPermission) {
-          const result = await this.androidPermissions.requestPermission(
-            this.androidPermissions.PERMISSION.READ_PHONE_STATE
-          );
-       
-          if (!result.hasPermission) {
-            throw new Error('Permissions required');
-          }
-       
-          // ok, a user gave us permission, we can get him identifiers after restart app
-          return;
-        }
-       
-         return this.uid.IMEI
-       }
+    getImei(): Promise<{imei?: string, msg?: string}> {
+        return new Promise( async (resolve, reject) => {
+            const { hasPermission } = await this.androidPermissions.checkPermission(
+                this.androidPermissions.PERMISSION.READ_PHONE_STATE
+            );
+             
+            if (!hasPermission) {
+                const result = await this.androidPermissions.requestPermission(
+                    this.androidPermissions.PERMISSION.READ_PHONE_STATE
+                );
+                if (!result.hasPermission) {
+                    reject({err: 'Permisos requeridos'});
+                } else {
+                    resolve({msg: "Permisos activados. Porfavor reinicie la aplicación"});
+                }
+            } else {
+                console.log("IMEI", this.uid.IMEI);
+                resolve({imei: this.uid.IMEI});
+            }
+            
+        })    
+    }
 }
