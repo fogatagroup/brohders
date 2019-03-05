@@ -6,10 +6,10 @@ import { LoginFlatModule } from '../../components/login/login-flat/login-flat.mo
 
 @NgModule({
   declarations: [
-    LoginFlatPage,
+    //LoginFlatPage,
   ],
   imports: [
-    IonicPageModule.forChild(LoginFlatPage),
+    //IonicPageModule.forChild(LoginFlatPage),
     LoginFlatModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

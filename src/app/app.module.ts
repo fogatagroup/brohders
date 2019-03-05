@@ -27,6 +27,7 @@ import { ExistenciasPage } from '../pages/existencias/existencias';
 import { ComparativoSemanalPage } from '../pages/comparativo-semanal/comparativo-semanal';
 import { ExcelService } from '../providers/excel.service';
 import { TransaccionesUsuarioPage } from '../pages/transacciones-usuario/transacciones-usuario';
+import { IonicPageModule } from 'ionic-angular/module';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,19 @@ import { TransaccionesUsuarioPage } from '../pages/transacciones-usuario/transac
     TransaccionesUsuarioPage
   ],
   imports: [
+    IonicPageModule.forChild(HomePage),
+    IonicPageModule.forChild(ListPage),
+    IonicPageModule.forChild(ProductsPage),
+    IonicPageModule.forChild(ClientsPage),
+    IonicPageModule.forChild(ShopsPage),
+    IonicPageModule.forChild(TastingsPage),
+    IonicPageModule.forChild(PronosticoPage),
+    IonicPageModule.forChild(LoginFlatPage),
+    IonicPageModule.forChild(UsersPage),
+    IonicPageModule.forChild(DevicesPage),
+    IonicPageModule.forChild(ExistenciasPage),
+    IonicPageModule.forChild(ComparativoSemanalPage),
+    IonicPageModule.forChild(TransaccionesUsuarioPage),
     HttpModule,
     BrowserModule,
     ComponentsModule,
