@@ -21,7 +21,7 @@ export class ClientsPage {
 
   clients: Client[];
   selectedClient: Client;
-
+  order:string = 'Z-A';
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private http: HttpService, private alertCtrl: AlertController) {
       this.refreshClients();
@@ -50,6 +50,7 @@ export class ClientsPage {
     this.refreshClients();
     this.selectedClient = null;
   }
+
 
   saveForm(){
     let client = this.clients.find(c => c.clientid == this.selectedClient.clientid);
@@ -99,4 +100,27 @@ export class ClientsPage {
     });
   }
 
+  changeOrder(){
+    if(this.order == 'Z-A'){
+      this.clients.sort( (a, b) =>{
+        if (a.name > b.name){
+          return 1;
+        }
+        if (a.name < b.name) {
+          return -1;
+        }
+    })
+      this.order = 'Z-A';
+    }else {
+      this.clients.sort( (a, b) =>{
+        if (a.name < b.name){
+          return 1;
+        }
+        if (a.name > b.name) {
+          return -1;
+        }
+    })
+      this.order = 'Z-A';
+    }
+  }
 }

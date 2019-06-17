@@ -18,6 +18,7 @@ import * as moment from 'moment';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { Transaction } from '../../models/transaction';
 import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'page-pronostico',
@@ -55,9 +56,17 @@ export class PronosticoPage implements OnInit{
   }
 
   getData(){
+    let loading = this.loadingCtrl.create({
+      content: "Cargando datos..."
+    })
+    loading.present();
     this.user = this.auth.getLoggerUser();
     this.http.get(`users/${this.user.userid}/shops`).subscribe(res => {
       this.shops = res.json() as Shop[];
+      loading.dismiss();
+    },
+    (error)=>{
+      loading.dismiss();
     })
     /*
     this.http.get(`sales`).subscribe(res => {
@@ -98,7 +107,7 @@ export class PronosticoPage implements OnInit{
   }
 
   calculate(value1,value2){
-    console.log(value2);
+    console.log(value1,'  ',value2);
     let loading = this.loadingCtrl.create({
       content: "Calculando pronóstico..."
     })
@@ -135,8 +144,8 @@ export class PronosticoPage implements OnInit{
         })
       }
     };
-    let salesQuery = JSON.stringify(filter);
-    this.http.get(`shops/${this.selectedShop.shopid}/sales?filter=${salesQuery}`).subscribe(res => {
+    let salesQuery = JSON.stringify(filter);/* ${salesQuery} */
+    this.http.get(`shops/${this.selectedShop.shopid}/sales?filter=`).subscribe(res => {
       this.sales = res.json() as Sale[];
       this.loading=true;
       ///LOS DE LA FECHAAAAA=======================================================
@@ -253,6 +262,11 @@ export class PronosticoPage implements OnInit{
       this.calculado = true;
       loading.dismiss();
     })
+    Swal.fire({
+      type:'success',
+      title:'Buen trabajo!',
+      text:'Pronostico calculado exitosamente!'
+    })
   }
 
   recalcular(): void {
@@ -354,7 +368,7 @@ export class PronosticoPage implements OnInit{
         let data = res.json();
         sameDaySale = data.length ? data[0] as Transaction : null;
         console.log("VENTA/EXISTENCIA MISMO DIA: ", sameDaySale);
-        if(sameDaySale){
+  /*       if(sameDaySale){
           let alert = this.alertCtrl.create({
             title: 'Existencia creada',
             message: 'Ya hay existencia creada para esta fecha y tienda. Verifique e intente de nuevo',
@@ -367,10 +381,10 @@ export class PronosticoPage implements OnInit{
           });
           loading.dismiss();
           alert.present();
-        } else {
+        } else { */
           loading.dismiss();
           this.checkPrevDaySale();
-        }
+        
       })
     }
   }
@@ -396,7 +410,7 @@ export class PronosticoPage implements OnInit{
       this.http.get(`transactions?filter=${JSON.stringify(filterAnterior)}`).toPromise().then(res => {
         let data = res.json();
         lastSale = data.length ? data[0] as Transaction : null;
-        if(lastSale){
+    /*     if(lastSale){ */
           this.http.get(`sales?filter=${JSON.stringify({where: {transactionid: lastSale.transactionid}})}`).subscribe(res => {
             let sales = res.json() as Sale[];
             for(let i  = 0; sales.length > i; i++){
@@ -409,7 +423,7 @@ export class PronosticoPage implements OnInit{
             loading.dismiss();
             this.checkout();
           })
-        } else {
+      /*   } else {
           let alertNoSale = this.alertCtrl.create({
             title: 'Dia anterior',
             subTitle: `No se encontró data del dia anterior ${diaAnterior.format("DD/MM/YYYY")} por lo que no se podrá actualizar`,
@@ -425,7 +439,7 @@ export class PronosticoPage implements OnInit{
           });
           loading.dismiss();
           alertNoSale.present();
-        }
+        } */
       }, () => {
         loading.dismiss();
       })

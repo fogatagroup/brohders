@@ -25,7 +25,7 @@ export class UsersPage {
   roles: Role[];
   devices: Device[];
   selectedUser: User;
-
+  order: string = 'Z-A';
   constructor(public navCtrl: NavController,  private http: HttpService, private alertCtrl: AlertController) {
 
   }
@@ -116,5 +116,27 @@ export class UsersPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad UsersPage');
   }
-
+  changeOrder(){
+    if(this.order == 'Z-A'){
+      this.users.sort( (a, b) =>{
+        if (a.username > b.username){
+          return 1;
+        }
+        if (a.username < b.username) {
+          return -1;
+        }
+    })
+      this.order = 'Z-A';
+    }else {
+      this.users.sort( (a, b) =>{
+        if (a.username < b.username){
+          return 1;
+        }
+        if (a.username > b.username) {
+          return -1;
+        }
+    })
+      this.order = 'Z-A';
+    }
+  }
 }

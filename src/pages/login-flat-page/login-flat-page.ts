@@ -36,6 +36,7 @@ export class LoginFlatPage {
         this.events =  {
           "onLogin" : this.onLogin
         }
+        this.username = localStorage.getItem('LastUser');
     }
 
     onEvent = async (event: string) => {
@@ -79,6 +80,7 @@ export class LoginFlatPage {
       this.toastCtrl.presentToast('Ingresando');
       this.auth.login(params).then(_ => {
         this.navCtrl.setRoot(HomePage);
+        localStorage.setItem('LastUser', this.username);
       }, _ => {
         this.toastCtrl.presentToast("Error al ingresar")
       })

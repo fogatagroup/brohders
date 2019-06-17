@@ -9,7 +9,7 @@
   
       <!-- Section form>-->
     <ion-col col-10 offset-1 col-md-6 offset-md-3>
-      <form padding>
+      <form padding autocomplete="on">
         <ion-row align-items-start>
           <ion-col col-12>
             <h1 style="margin: 0 0 0 0"><strong>{{data.title}}</strong> {{data.subtitle}}</h1>
@@ -21,12 +21,13 @@
             <div input-field>
               <!-- Input-field-text -->
               <ion-item no-padding>
-                <ion-input type="text" [placeholder]="data.txtUsername" [(ngModel)]="username" [ngModelOptions]="{standalone: true}"></ion-input>
+                <ion-input type="text" autocomplete="on" [placeholder]="data.txtUsername" [(ngModel)]="username" [ngModelOptions]="{standalone: true}" name="username"></ion-input>
   <!--               <ion-label no-margin *ngIf="!isUsernameValid">{{data.errorUser}}</ion-label>
    -->            </ion-item>
               <!-- Input-field-password -->
               <ion-item no-padding>
-                <ion-input type="password" [placeholder]="data.txtPassword" [(ngModel)]="password" [ngModelOptions]="{standalone: true}"></ion-input>
+                <ion-input  type="password" [placeholder]="data.txtPassword" [(ngModel)]="password" [ngModelOptions]="{standalone: true}" name="password">
+                </ion-input>
                 <!-- <ion-label no-margin *ngIf="!isPasswordValid">{{data.errorPassword}}</ion-label> -->
               </ion-item>
             </div>

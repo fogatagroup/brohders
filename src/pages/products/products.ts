@@ -14,6 +14,7 @@ export class ProductsPage implements OnInit{
   private loading:boolean=false;
   private productsList:Product[]=[];
   private selectedProduct:Product = null;
+  order: string = 'Z-A';
 
   constructor(public navCtrl: NavController,  private http: HttpService, private alertCtrl: AlertController) {
 
@@ -47,6 +48,8 @@ export class ProductsPage implements OnInit{
   fetch(){
     this.http.get("products").subscribe(res => {
       this.productsList = res.json() as Product[];
+      console.log(this.productsList);
+      
     })
   }
 
@@ -82,5 +85,28 @@ export class ProductsPage implements OnInit{
 
   cancelForm(){
     this.selectedProduct = null;
+  }
+  changeOrder(){
+    if(this.order == 'Z-A'){
+      this.productsList.sort( (a, b) =>{
+        if (a.name > b.name){
+          return 1;
+        }
+        if (a.name < b.name) {
+          return -1;
+        }
+    })
+      this.order = 'Z-A';
+    }else {
+      this.productsList.sort( (a, b) =>{
+        if (a.name < b.name){
+          return 1;
+        }
+        if (a.name > b.name) {
+          return -1;
+        }
+    })
+      this.order = 'Z-A';
+    }
   }
 }

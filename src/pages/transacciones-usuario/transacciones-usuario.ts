@@ -10,12 +10,6 @@ import { Sale } from '../../models/sales';
 import { weekdays } from '../../config/config'
 import { ExcelService } from '../../providers/excel.service';
 
-/**
- * Generated class for the TransaccionesUsuarioPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 class UserTransaction {
   semana: number;
@@ -49,11 +43,30 @@ export class TransaccionesUsuarioPage {
   }
 
   private getData(): void {
+    let loading = this.loading.create({
+      content: "Cargando datos"
+    });
+    loading.present();
     this.http.get('users').subscribe(res => this.users = res.json() as User[]);
-    this.http.get('products').subscribe(res => this.products = res.json() as Product[]);
-    this.http.get('shops').subscribe(res => this.shops = res.json() as Shop[]);
+    this.http.get('products').subscribe(res => {this.products = res.json() as Product[]
+      this.order(this.users, 'username');
+    });
+    this.http.get('shops').subscribe(res => {this.shops = res.json() as Shop[]
+      this.order(this.shops, 'name');
+    });
+    loading.dismiss();
   }
-
+  order(array, key){
+      array.sort( (a, b) =>{
+        if (a[key] > b[key]){
+          return 1;
+        }
+        if (a[key] < b[key]) {
+          return -1;
+        }
+    })
+    return array;
+  }
   searchUserTransactions(): void {
     if(this.hasta && this.selectedUser){
       let loading = this.loading.create({

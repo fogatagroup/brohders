@@ -2,6 +2,7 @@ export class Product {
     productid: number; 
     name: string; 
     description:string;
+    shortName?:string;
    /*  createdon: any; 
     cratedby:number; 
     modifiedon:any; 

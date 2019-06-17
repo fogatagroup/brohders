@@ -83,6 +83,8 @@
         <user-shops [userid]="selectedUser.userid"></user-shops>
       </form>
     </div>
-    
+    <ion-fab bottom right *ngIf="!selectedUser">
+      <button ion-fab (click)="changeOrder()">{{order}}</button>
+    </ion-fab>
   </ion-content>
   

@@ -29,6 +29,7 @@ import { ExcelService } from '../providers/excel.service';
 import { TransaccionesUsuarioPage } from '../pages/transacciones-usuario/transacciones-usuario';
 import { IonicPageModule } from 'ionic-angular/module';
 
+
 @NgModule({
   declarations: [
     MyApp,
@@ -44,7 +45,8 @@ import { IonicPageModule } from 'ionic-angular/module';
     DevicesPage,
     ExistenciasPage,
     ComparativoSemanalPage,
-    TransaccionesUsuarioPage
+    TransaccionesUsuarioPage,
+
   ],
   imports: [
     IonicPageModule.forChild(HomePage),

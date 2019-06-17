@@ -75,7 +75,11 @@ export class MyApp {
           subTitle: 'No tiene permisos para acceder a esa página',
           buttons: ['Aceptar']
       });
-      alert.present();
+      alert.present().then(() => {
+        this.auth.logout().then(_ => {
+          this.nav.setRoot(LoginFlatPage);
+        })
+      })
     }
   }
 

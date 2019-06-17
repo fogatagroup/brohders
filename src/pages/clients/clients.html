@@ -51,6 +51,8 @@
           <shops [clientid]="selectedClient.clientid" (onSelectShop)="onShopSelect($event)"></shops>
         </div>
     </div>
-    
+    <ion-fab bottom right *ngIf="!selectedClient">
+      <button ion-fab (click)="changeOrder()">{{order}}</button>
+    </ion-fab>
   </ion-content>
   
