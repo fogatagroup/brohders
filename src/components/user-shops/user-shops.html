@@ -10,7 +10,7 @@
             </ion-item-divider>
           <ion-item>
             <ion-label>Tienda</ion-label>
-            <ion-select type="text" required #shopid="ngModel" [(ngModel)]="selectedItem.shopid" name="shopid">
+            <ion-select type="text" multiple="true" required #shopid="ngModel" [(ngModel)]="selectedItem.shopid" name="shopid">
               <ion-option *ngFor="let s of shops" [value]="s.shopid">{{s.name}}</ion-option>
             </ion-select>
           </ion-item>
