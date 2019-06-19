@@ -126,7 +126,7 @@ export class UsersPage {
           return -1;
         }
     })
-      this.order = 'Z-A';
+      this.order = 'A-Z';
     }else {
       this.users.sort( (a, b) =>{
         if (a.username < b.username){

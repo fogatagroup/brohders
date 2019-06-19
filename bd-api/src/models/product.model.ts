@@ -30,6 +30,10 @@ export class Product extends Entity {
     default: true,
   })
   isactive?: boolean;
+  
+  @property({ 
+    Type: 'string'
+  }) shortName: string;
 
   constructor(data?: Partial<Product>) {
     super(data);

@@ -96,7 +96,7 @@ export class ProductsPage implements OnInit{
           return -1;
         }
     })
-      this.order = 'Z-A';
+      this.order = 'A-Z';
     }else {
       this.productsList.sort( (a, b) =>{
         if (a.name < b.name){

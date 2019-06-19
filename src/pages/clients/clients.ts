@@ -110,7 +110,7 @@ export class ClientsPage {
           return -1;
         }
     })
-      this.order = 'Z-A';
+      this.order = 'A-Z';
     }else {
       this.clients.sort( (a, b) =>{
         if (a.name < b.name){

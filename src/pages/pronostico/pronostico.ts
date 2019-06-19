@@ -261,12 +261,13 @@ export class PronosticoPage implements OnInit{
       this.loading=false;
       this.calculado = true;
       loading.dismiss();
+      Swal.fire({
+        type:'success',
+        title:'Buen trabajo!',
+        text:'Pronostico calculado exitosamente!'
+      })
     })
-    Swal.fire({
-      type:'success',
-      title:'Buen trabajo!',
-      text:'Pronostico calculado exitosamente!'
-    })
+  
   }
 
   recalcular(): void {
