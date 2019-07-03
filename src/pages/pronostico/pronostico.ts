@@ -257,8 +257,6 @@ export class PronosticoPage implements OnInit{
         }
       })
       this.pronostico=total;
-      console.log('Antes' ,this.pronostico);
-      
      this.index = Object.keys(this.productForm.value);
       for(var i in this.index){
         this.pronostico.map(p => {
@@ -267,7 +265,6 @@ export class PronosticoPage implements OnInit{
           }
         })
       }
-    console.log('Despues' ,this.pronostico);
       this.loading=false;
       this.calculado = true;
       loading.dismiss();
