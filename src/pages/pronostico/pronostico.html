@@ -39,7 +39,7 @@
                     <ion-option *ngFor="let day of weekdays" [value]="day.value">{{day.day}}</ion-option>
                 </ion-select>
               </ion-item>
-              <button ion-button type='button'  (click)="calculate(date.value,weekday.value)" *ngIf="!calculado">Calcular</button>
+              <button ion-button type='button'  (click)="calculate(date.value,weekday.value)" *ngIf="!calculado" [disabled]="!productForm.valid||!shop.value">Calcular</button>
               <button ion-button color="warning" type='button' (click)="recalcular()" *ngIf="calculado">Recalcular</button>
               <button ion-button color="danger" type='button' (click)="refresh()">Cancelar</button>
           </div>

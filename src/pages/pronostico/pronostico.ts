@@ -43,6 +43,7 @@ export class PronosticoPage implements OnInit{
   private diaCalculado: moment.Moment;
   private currentSales: Sale[];
   public comentarioVenta: string;
+  public index: any = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: HttpService, private auth: AuthService, private fb: FormBuilder, private alertCtrl: AlertController, private loadingCtrl: LoadingController) {
     this.getData();
@@ -246,7 +247,7 @@ export class PronosticoPage implements OnInit{
       //restar existencia y listo!!!!:)
       var totalResult=this.mergeData(resultFecha);
       var total=this.mergeData(totalResult.concat(totalPara));
-      //console.log(total)
+      console.log(this.productForm)
       total.forEach(t=>{
         if(this.stockList.filter(u=>u.productid==t.productid).length>0){
           t.value=t.value-this.stockList.filter(u=>u.productid==t.productid)[0].cantity;
@@ -256,8 +257,17 @@ export class PronosticoPage implements OnInit{
         }
       })
       this.pronostico=total;
-      console.log('prono',this.pronostico)
+      console.log('Antes' ,this.pronostico);
       
+     this.index = Object.keys(this.productForm.value);
+      for(var i in this.index){
+        this.pronostico.map(p => {
+          if(this.index[i] == p.productid){
+            p.value = p.value - this.productForm.value[this.index[i]];
+          }
+        })
+      }
+    console.log('Despues' ,this.pronostico);
       this.loading=false;
       this.calculado = true;
       loading.dismiss();
