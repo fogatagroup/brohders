@@ -49,7 +49,7 @@ export class LoginFlatPage {
                 'pass': this.password,
                 'imei': null
             }; 
-            if(inforceDevice && this.plt.is('mobileweb')){
+            /* if(inforceDevice && this.plt.is('mobileweb')){
                 let notAllowed = this.alert.create({
                     title: "Denegado",
                     message: "Se ha denegado el acceso ya que no se permite el acceso a través de explorador"
@@ -69,9 +69,9 @@ export class LoginFlatPage {
                     alert.present();
                     return;
                 }
-            } else {
+            } else { */
                 console.log("SKIPPING IMEI VALIDATION");
-            }
+            /* } */
             this.events[event](loginData);
         }        
     }
