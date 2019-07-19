@@ -270,9 +270,9 @@ export class PronosticoPage implements OnInit{
           if(this.index[i] == this.pronostico[j].productid){
             this.pronostico[j].value = this.pronostico[j].value - this.productForm.value[this.index[i]];
            /* Quitar para hacer pruebas */
-        /*     if(this.pronostico[j].value < 0){
+            if(this.pronostico[j].value < 0){
               this.pronostico[j].value = 0;
-            } */
+            }
           }
         }
       /*   }) */
