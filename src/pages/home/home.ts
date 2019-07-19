@@ -25,7 +25,7 @@ export class HomePage {
   
   }
   ionViewDidLoad(){
-    this.barChart = new Chart(this.barCanvas.nativeElement, {
+    /* this.barChart = new Chart(this.barCanvas.nativeElement, {
 
       type: 'bar',
       data: {
@@ -62,7 +62,7 @@ export class HomePage {
           }
       }
 
-  });
+  }); */
   }
   convert2object(matriz:number[][]){
     var list=[]

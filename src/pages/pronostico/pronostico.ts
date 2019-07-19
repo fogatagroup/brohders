@@ -33,7 +33,7 @@ export class PronosticoPage implements OnInit{
   private loading:boolean=false;
   private weekdays=weekdays;
   private stockList:Stock[];
-  private pronostico:{productid:number;value:number}[]=[];
+  private pronostico: any = [];
   private user: User;
   public shops: Shop[];
   public selectedShop: Shop | null;
@@ -238,32 +238,44 @@ export class PronosticoPage implements OnInit{
       })
       //sumar totales
       var totalPara=this.mergeData(resultPara);
+      
       //hacer incremento de la estanteria
       totalPara.forEach(t=>{
         var item=this.shelveList.filter(e=>e.productid==t.productid)[0];
         t.value=t.value+(item.size*(item.porcentage/100));
-      }) 
+      })
       
+      console.log('totalPara', totalPara);
+      console.log('resultFecha', resultFecha);
       //restar existencia y listo!!!!:)
       var totalResult=this.mergeData(resultFecha);
       var total=this.mergeData(totalResult.concat(totalPara));
-      console.log(this.productForm)
-      total.forEach(t=>{
+    /*   console.log(this.stockList) */
+/*       total.forEach(t=>{
         if(this.stockList.filter(u=>u.productid==t.productid).length>0){
           t.value=t.value-this.stockList.filter(u=>u.productid==t.productid)[0].cantity;
           if(t.value<0){
             t.value=0;
           }
         }
-      })
-      this.pronostico=total;
-     this.index = Object.keys(this.productForm.value);
+      }); */
+      /*    
+      */
+     this.pronostico=totalPara;
+      this.index = Object.keys(this.productForm.value);
+      console.log(this.pronostico, this.index)
       for(var i in this.index){
-        this.pronostico.map(p => {
-          if(this.index[i] == p.productid){
-            p.value = p.value - this.productForm.value[this.index[i]];
+        for(var j in this.pronostico){
+          console.log(this.pronostico);
+          if(this.index[i] == this.pronostico[j].productid){
+            this.pronostico[j].value = this.pronostico[j].value - this.productForm.value[this.index[i]];
+           /* Quitar para hacer pruebas */
+        /*     if(this.pronostico[j].value < 0){
+              this.pronostico[j].value = 0;
+            } */
           }
-        })
+        }
+      /*   }) */
       }
       this.loading=false;
       this.calculado = true;
