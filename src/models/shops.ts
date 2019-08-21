@@ -1,8 +1,8 @@
 export class Shop {
-    shopid: number; 
-    name: string; 
-    description:string;
-    /*
+  shopid: any;
+  name: string;
+  description: string;
+  /*
     createdon: number;
     createdby: string;
      createdon: any; 
@@ -11,6 +11,6 @@ export class Shop {
     modifiedby:number; 
     deletedon: any; 
     deletedby: number; */
-    isdeleted: boolean; 
-    isactive: boolean; 
+  isdeleted: boolean;
+  isactive: boolean;
 }

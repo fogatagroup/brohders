@@ -51,7 +51,7 @@ export class PronosticoPage implements OnInit{
 
   ngOnInit(): void {
   }
-  
+
   refresh(): void {
     this.navCtrl.setRoot(this.navCtrl.getActive().component);
   }
@@ -126,7 +126,7 @@ export class PronosticoPage implements OnInit{
     let weeks = [];
     let weeksToConsider = 6;
     let bufferWeeks = 1;
-    this.diaCalculado = moment(value1.year+'-'+value1.month+'-'+value1.day, 'YYYY-MM-DD'); 
+    this.diaCalculado = moment(value1.year+'-'+value1.month+'-'+value1.day, 'YYYY-MM-DD');
     let firstWeekDate = this.diaCalculado.clone().subtract(weeksToConsider + (bufferWeeks + (!this.diaCalculado.day() ? 1 : 0)), 'week').endOf('week');
     do {
       let dateToAdd = firstWeekDate.clone();
@@ -146,6 +146,8 @@ export class PronosticoPage implements OnInit{
       }
     };
     let salesQuery = JSON.stringify(filter);/* ${salesQuery} */
+    //console.log('Esta es la query: ' + salesQuery);
+    //this.http.get(`shops/${this.selectedShop.shopid}/sales?filter=${salesQuery}`).subscribe(res => {
     this.http.get(`shops/${this.selectedShop.shopid}/sales?filter=`).subscribe(res => {
       this.sales = res.json() as Sale[];
       this.loading=true;
@@ -238,13 +240,13 @@ export class PronosticoPage implements OnInit{
       })
       //sumar totales
       var totalPara=this.mergeData(resultPara);
-      
+
       //hacer incremento de la estanteria
       totalPara.forEach(t=>{
         var item=this.shelveList.filter(e=>e.productid==t.productid)[0];
         t.value=t.value+(item.size*(item.porcentage/100));
       })
-      
+
       console.log('totalPara', totalPara);
       console.log('resultFecha', resultFecha);
       //restar existencia y listo!!!!:)
@@ -259,8 +261,29 @@ export class PronosticoPage implements OnInit{
           }
         }
       }); */
-      /*    
+      /*
       */
+
+      total.forEach(t=>{
+        if(this.stockList.filter(u=>u.productid==t.productid).length>0){
+          t.value=t.value-this.stockList.filter(u=>u.productid==t.productid)[0].cantity;
+          if(t.value<0){
+            t.value=0;
+          }
+        }
+      })
+      this.pronostico=total;
+      console.log('prono',this.pronostico)
+
+      this.loading=false;
+      this.calculado = true;
+      loading.dismiss();
+      Swal.fire({
+        type:'success',
+        title:'Buen trabajo!',
+        text:'Pronostico calculado exitosamente!'
+      })
+      /*
      this.pronostico=totalPara;
       this.index = Object.keys(this.productForm.value);
       console.log(this.pronostico, this.index)
@@ -269,13 +292,13 @@ export class PronosticoPage implements OnInit{
           console.log(this.pronostico);
           if(this.index[i] == this.pronostico[j].productid){
             this.pronostico[j].value = this.pronostico[j].value - this.productForm.value[this.index[i]];
-           /* Quitar para hacer pruebas */
+            //Quitar para hacer pruebas
             if(this.pronostico[j].value < 0){
               this.pronostico[j].value = 0;
             }
           }
         }
-      /*   }) */
+      //   })
       }
       this.loading=false;
       this.calculado = true;
@@ -285,8 +308,11 @@ export class PronosticoPage implements OnInit{
         title:'Buen trabajo!',
         text:'Pronostico calculado exitosamente!'
       })
+*/
+
+
     })
-  
+
   }
 
   recalcular(): void {
@@ -361,12 +387,12 @@ export class PronosticoPage implements OnInit{
         let existencia = this.productForm.value[Object.keys(this.productForm.value).find(k => Number(k) == p.productid)];
         let venta = this.ventaForm.value[Object.keys(this.ventaForm.value).find(k => Number(k) == p.productid)];
         return {
-          forecast: !isNaN(p.value) ? p.value : Number(venta), 
-          monto: 0, 
-          stock: Number(existencia), 
-          dispatch: Number(venta), 
+          forecast: !isNaN(p.value) ? p.value : Number(venta),
+          monto: 0,
+          stock: Number(existencia),
+          dispatch: Number(venta),
           semana: this.diaCalculado.month() == 11 && this.diaCalculado.week() == 1 && !this.diaCalculado.day() ? 52 : this.diaCalculado.week() - (!this.diaCalculado.day() ? 1 : 0),
-          year: this.diaCalculado.month() == 11 /*DICIEMBRE */ && this.diaCalculado.week() == 1 && this.diaCalculado.day() ?  this.diaCalculado.year() + 1 : this.diaCalculado.year(), 
+          year: this.diaCalculado.month() == 11 /*DICIEMBRE */ && this.diaCalculado.week() == 1 && this.diaCalculado.day() ?  this.diaCalculado.year() + 1 : this.diaCalculado.year(),
           productid: p.productid,
           shopid: this.selectedShop.shopid,
           userid: this.user.userid,
@@ -404,7 +430,7 @@ export class PronosticoPage implements OnInit{
         } else { */
           loading.dismiss();
           this.checkPrevDaySale();
-        
+
       })
     }
   }
