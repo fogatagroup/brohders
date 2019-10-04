@@ -152,20 +152,42 @@ export class ExistenciasPage {
         },
         limit: 1
       }
-      console.log(filter);
+      console.log(this.currentSales);
       let sameDaySale = null as Transaction;
       this.http.get(`transactions?filter=${JSON.stringify(filter)}`).subscribe(res => {
         let data = res.json();
+        console.log(data);
         sameDaySale = data.length ? data[0] as Transaction : null;
         console.log("VENTA/EXISTENCIA MISMO DIA: ", sameDaySale);
         if(sameDaySale){
           let alert = this.alertCtrl.create({
             title: 'Existencia creada',
-            message: 'Ya hay existencia creada para esta fecha y tienda. Verifique e intente de nuevo',
+            message: 'Ya hay existencia para este dia, quiere usted modificar esta existencia?',
             buttons: [
               {
-                text: 'Aceptar',
-                role: 'cancel'
+                text: 'No',
+                role: 'submit',
+                handler: () => {
+         
+              }
+              },
+              {
+                text: 'Si',
+                role: 'submit',
+                handler: data => {
+                /* Funcion  */
+                this.http.get(`sales?filter=${JSON.stringify({where: {transactionid: sameDaySale.transactionid}})}`).subscribe(res => {
+                  let sales = res.json() as Sale[];
+                  console.log(sales);
+                  var i = 0;
+                  sales.forEach(sale => {
+                    sale.stock = this.currentSales[i].stock;
+                    i++;
+                  });
+                  this.checkout();
+                })
+                /* Funcion */
+              }
               }
             ]
           });
